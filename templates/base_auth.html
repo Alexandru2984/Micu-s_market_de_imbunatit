@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Micu's Market{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.svg' %}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/base_auth.css' %}">
+    {% block extra_css %}{% endblock %}
+    {% block extra_js %}{% endblock%}
+    <script src="{% static 'js/password-toggle.js' %}"></script>
+</head>
+<body>
+    <!-- Simple Header for Auth Pages -->
+    <header class="auth-simple-header">
+        <div class="container">
+            <a href="{% url 'listings:home' %}">
+                <h1>🏪 Micu's Market</h1>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Messages -->
+        {% if messages %}
+            <div class="auth-messages">
+                {% for message in messages %}
+                    <div class="auth-message {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Simple Footer -->
+    <footer class="auth-simple-footer">
+        <p>&copy; 2025 Micu's Market. Toate drepturile rezervate.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1234 @@
+[
+{
+  "model": "categories.category",
+  "pk": 1,
+  "fields": {
+    "name": "Electronice",
+    "slug": "electronice",
+    "description": "Telefoane, laptopuri, televizoare și alte gadget-uri",
+    "icon": "fas fa-laptop",
+    "parent": null,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-11T16:27:34.346Z",
+    "updated_at": "2025-09-11T16:27:34.346Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 2,
+  "fields": {
+    "name": "Telefoane Mobile",
+    "slug": "telefoane-mobile",
+    "description": "",
+    "icon": "",
+    "parent": 1,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-11T16:27:34.350Z",
+    "updated_at": "2025-09-11T16:27:34.350Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 3,
+  "fields": {
+    "name": "Laptopuri & Computere",
+    "slug": "laptopuri-computere",
+    "description": "",
+    "icon": "",
+    "parent": 1,
+    "is_active": true,
+    "order": 1,
+    "created_at": "2025-09-11T16:27:34.353Z",
+    "updated_at": "2025-09-11T16:27:34.353Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 4,
+  "fields": {
+    "name": "Televizoare",
+    "slug": "televizoare",
+    "description": "",
+    "icon": "",
+    "parent": 1,
+    "is_active": true,
+    "order": 2,
+    "created_at": "2025-09-11T16:27:34.355Z",
+    "updated_at": "2025-09-11T16:27:34.355Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 5,
+  "fields": {
+    "name": "Audio & Video",
+    "slug": "audio-video",
+    "description": "",
+    "icon": "",
+    "parent": 1,
+    "is_active": true,
+    "order": 3,
+    "created_at": "2025-09-11T16:27:34.357Z",
+    "updated_at": "2025-09-11T16:27:34.357Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 6,
+  "fields": {
+    "name": "Console & Gaming",
+    "slug": "console-gaming",
+    "description": "",
+    "icon": "",
+    "parent": 1,
+    "is_active": true,
+    "order": 4,
+    "created_at": "2025-09-11T16:27:34.359Z",
+    "updated_at": "2025-09-11T16:27:34.359Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 7,
+  "fields": {
+    "name": "Accesorii Electronice",
+    "slug": "accesorii-electronice",
+    "description": "",
+    "icon": "",
+    "parent": 1,
+    "is_active": true,
+    "order": 5,
+    "created_at": "2025-09-11T16:27:34.362Z",
+    "updated_at": "2025-09-11T16:27:34.362Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 8,
+  "fields": {
+    "name": "Camere Foto",
+    "slug": "camere-foto",
+    "description": "",
+    "icon": "",
+    "parent": 1,
+    "is_active": true,
+    "order": 6,
+    "created_at": "2025-09-11T16:27:34.364Z",
+    "updated_at": "2025-09-11T16:27:34.364Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 9,
+  "fields": {
+    "name": "Smart Home",
+    "slug": "smart-home",
+    "description": "",
+    "icon": "",
+    "parent": 1,
+    "is_active": true,
+    "order": 7,
+    "created_at": "2025-09-11T16:27:34.366Z",
+    "updated_at": "2025-09-11T16:27:34.366Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 10,
+  "fields": {
+    "name": "Auto & Moto",
+    "slug": "auto-moto",
+    "description": "Mașini, motociclete și piese auto",
+    "icon": "fas fa-car",
+    "parent": null,
+    "is_active": true,
+    "order": 1,
+    "created_at": "2025-09-11T16:27:34.368Z",
+    "updated_at": "2025-09-11T16:27:34.368Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 11,
+  "fields": {
+    "name": "Autoturisme",
+    "slug": "autoturisme",
+    "description": "",
+    "icon": "",
+    "parent": 10,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-11T16:27:34.370Z",
+    "updated_at": "2025-09-11T16:27:34.370Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 12,
+  "fields": {
+    "name": "Motociclete",
+    "slug": "motociclete",
+    "description": "",
+    "icon": "",
+    "parent": 10,
+    "is_active": true,
+    "order": 1,
+    "created_at": "2025-09-11T16:27:34.372Z",
+    "updated_at": "2025-09-11T16:27:34.372Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 13,
+  "fields": {
+    "name": "Piese Auto",
+    "slug": "piese-auto",
+    "description": "",
+    "icon": "",
+    "parent": 10,
+    "is_active": true,
+    "order": 2,
+    "created_at": "2025-09-11T16:27:34.375Z",
+    "updated_at": "2025-09-11T16:27:34.375Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 14,
+  "fields": {
+    "name": "Anvelope",
+    "slug": "anvelope",
+    "description": "",
+    "icon": "",
+    "parent": 10,
+    "is_active": true,
+    "order": 3,
+    "created_at": "2025-09-11T16:27:34.377Z",
+    "updated_at": "2025-09-11T16:27:34.377Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 15,
+  "fields": {
+    "name": "Accesorii Auto",
+    "slug": "accesorii-auto",
+    "description": "",
+    "icon": "",
+    "parent": 10,
+    "is_active": true,
+    "order": 4,
+    "created_at": "2025-09-11T16:27:34.379Z",
+    "updated_at": "2025-09-11T16:27:34.379Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 16,
+  "fields": {
+    "name": "Camioane & Utilitare",
+    "slug": "camioane-utilitare",
+    "description": "",
+    "icon": "",
+    "parent": 10,
+    "is_active": true,
+    "order": 5,
+    "created_at": "2025-09-11T16:27:34.381Z",
+    "updated_at": "2025-09-11T16:27:34.381Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 17,
+  "fields": {
+    "name": "ATV & Scutere",
+    "slug": "atv-scutere",
+    "description": "",
+    "icon": "",
+    "parent": 10,
+    "is_active": true,
+    "order": 6,
+    "created_at": "2025-09-11T16:27:34.383Z",
+    "updated_at": "2025-09-11T16:27:34.383Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 18,
+  "fields": {
+    "name": "Casă & Grădină",
+    "slug": "casa-gradina",
+    "description": "Mobilier, decorațiuni și articole pentru grădină",
+    "icon": "fas fa-home",
+    "parent": null,
+    "is_active": true,
+    "order": 2,
+    "created_at": "2025-09-11T16:27:34.387Z",
+    "updated_at": "2025-09-11T16:27:34.387Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 19,
+  "fields": {
+    "name": "Mobilier",
+    "slug": "mobilier",
+    "description": "",
+    "icon": "",
+    "parent": 18,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-11T16:27:34.389Z",
+    "updated_at": "2025-09-11T16:27:34.389Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 20,
+  "fields": {
+    "name": "Decorațiuni",
+    "slug": "decoratiuni",
+    "description": "",
+    "icon": "",
+    "parent": 18,
+    "is_active": true,
+    "order": 1,
+    "created_at": "2025-09-11T16:27:34.391Z",
+    "updated_at": "2025-09-11T16:27:34.391Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 21,
+  "fields": {
+    "name": "Electrocasnice",
+    "slug": "electrocasnice",
+    "description": "",
+    "icon": "",
+    "parent": 18,
+    "is_active": true,
+    "order": 2,
+    "created_at": "2025-09-11T16:27:34.393Z",
+    "updated_at": "2025-09-11T16:27:34.393Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 22,
+  "fields": {
+    "name": "Grădină & Exterior",
+    "slug": "gradina-exterior",
+    "description": "",
+    "icon": "",
+    "parent": 18,
+    "is_active": true,
+    "order": 3,
+    "created_at": "2025-09-11T16:27:34.395Z",
+    "updated_at": "2025-09-11T16:27:34.395Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 23,
+  "fields": {
+    "name": "Scule & DIY",
+    "slug": "scule-diy",
+    "description": "",
+    "icon": "",
+    "parent": 18,
+    "is_active": true,
+    "order": 4,
+    "created_at": "2025-09-11T16:27:34.398Z",
+    "updated_at": "2025-09-11T16:27:34.398Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 24,
+  "fields": {
+    "name": "Iluminat",
+    "slug": "iluminat",
+    "description": "",
+    "icon": "",
+    "parent": 18,
+    "is_active": true,
+    "order": 5,
+    "created_at": "2025-09-11T16:27:34.400Z",
+    "updated_at": "2025-09-11T16:27:34.400Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 25,
+  "fields": {
+    "name": "Textile & Covoare",
+    "slug": "textile-covoare",
+    "description": "",
+    "icon": "",
+    "parent": 18,
+    "is_active": true,
+    "order": 6,
+    "created_at": "2025-09-11T16:27:34.402Z",
+    "updated_at": "2025-09-11T16:27:34.402Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 26,
+  "fields": {
+    "name": "Modă & Beauty",
+    "slug": "moda-beauty",
+    "description": "Îmbrăcăminte, încălțăminte și produse de înfrumusețare",
+    "icon": "fas fa-tshirt",
+    "parent": null,
+    "is_active": true,
+    "order": 3,
+    "created_at": "2025-09-11T16:27:34.404Z",
+    "updated_at": "2025-09-11T16:27:34.404Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 27,
+  "fields": {
+    "name": "Îmbrăcăminte Femei",
+    "slug": "imbracaminte-femei",
+    "description": "",
+    "icon": "",
+    "parent": 26,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-11T16:27:34.406Z",
+    "updated_at": "2025-09-11T16:27:34.406Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 28,
+  "fields": {
+    "name": "Îmbrăcăminte Bărbați",
+    "slug": "imbracaminte-barbati",
+    "description": "",
+    "icon": "",
+    "parent": 26,
+    "is_active": true,
+    "order": 1,
+    "created_at": "2025-09-11T16:27:34.408Z",
+    "updated_at": "2025-09-11T16:27:34.408Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 29,
+  "fields": {
+    "name": "Încălțăminte",
+    "slug": "incaltaminte",
+    "description": "",
+    "icon": "",
+    "parent": 26,
+    "is_active": true,
+    "order": 2,
+    "created_at": "2025-09-11T16:27:34.410Z",
+    "updated_at": "2025-09-11T16:27:34.410Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 30,
+  "fields": {
+    "name": "Accesorii Fashion",
+    "slug": "accesorii-fashion",
+    "description": "",
+    "icon": "",
+    "parent": 26,
+    "is_active": true,
+    "order": 3,
+    "created_at": "2025-09-11T16:27:34.412Z",
+    "updated_at": "2025-09-11T16:27:34.412Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 31,
+  "fields": {
+    "name": "Bijuterii & Ceasuri",
+    "slug": "bijuterii-ceasuri",
+    "description": "",
+    "icon": "",
+    "parent": 26,
+    "is_active": true,
+    "order": 4,
+    "created_at": "2025-09-11T16:27:34.415Z",
+    "updated_at": "2025-09-11T16:27:34.415Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 32,
+  "fields": {
+    "name": "Produse de Beauty",
+    "slug": "produse-de-beauty",
+    "description": "",
+    "icon": "",
+    "parent": 26,
+    "is_active": true,
+    "order": 5,
+    "created_at": "2025-09-11T16:27:34.417Z",
+    "updated_at": "2025-09-11T16:27:34.417Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 33,
+  "fields": {
+    "name": "Parfumuri",
+    "slug": "parfumuri",
+    "description": "",
+    "icon": "",
+    "parent": 26,
+    "is_active": true,
+    "order": 6,
+    "created_at": "2025-09-11T16:27:34.419Z",
+    "updated_at": "2025-09-11T16:27:34.419Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 34,
+  "fields": {
+    "name": "Sport & Hobby",
+    "slug": "sport-hobby",
+    "description": "Echipamente sportive, hobby și timp liber",
+    "icon": "fas fa-dumbbell",
+    "parent": null,
+    "is_active": true,
+    "order": 4,
+    "created_at": "2025-09-11T16:27:34.421Z",
+    "updated_at": "2025-09-11T16:27:34.421Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 35,
+  "fields": {
+    "name": "Fitness & Gym",
+    "slug": "fitness-gym",
+    "description": "",
+    "icon": "",
+    "parent": 34,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-11T16:27:34.423Z",
+    "updated_at": "2025-09-11T16:27:34.423Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 36,
+  "fields": {
+    "name": "Biciclete",
+    "slug": "biciclete",
+    "description": "",
+    "icon": "",
+    "parent": 34,
+    "is_active": true,
+    "order": 1,
+    "created_at": "2025-09-11T16:27:34.425Z",
+    "updated_at": "2025-09-11T16:27:34.425Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 37,
+  "fields": {
+    "name": "Sporturi de Iarnă",
+    "slug": "sporturi-de-iarna",
+    "description": "",
+    "icon": "",
+    "parent": 34,
+    "is_active": true,
+    "order": 2,
+    "created_at": "2025-09-11T16:27:34.428Z",
+    "updated_at": "2025-09-11T16:27:34.428Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 38,
+  "fields": {
+    "name": "Sporturi Acvatice",
+    "slug": "sporturi-acvatice",
+    "description": "",
+    "icon": "",
+    "parent": 34,
+    "is_active": true,
+    "order": 3,
+    "created_at": "2025-09-11T16:27:34.430Z",
+    "updated_at": "2025-09-11T16:27:34.430Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 39,
+  "fields": {
+    "name": "Echipament Outdoor",
+    "slug": "echipament-outdoor",
+    "description": "",
+    "icon": "",
+    "parent": 34,
+    "is_active": true,
+    "order": 4,
+    "created_at": "2025-09-11T16:27:34.432Z",
+    "updated_at": "2025-09-11T16:27:34.432Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 40,
+  "fields": {
+    "name": "Hobby & Colecții",
+    "slug": "hobby-colectii",
+    "description": "",
+    "icon": "",
+    "parent": 34,
+    "is_active": true,
+    "order": 5,
+    "created_at": "2025-09-11T16:27:34.434Z",
+    "updated_at": "2025-09-11T16:27:34.434Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 41,
+  "fields": {
+    "name": "Instrumente Muzicale",
+    "slug": "instrumente-muzicale",
+    "description": "",
+    "icon": "",
+    "parent": 34,
+    "is_active": true,
+    "order": 6,
+    "created_at": "2025-09-11T16:27:34.436Z",
+    "updated_at": "2025-09-11T16:27:34.436Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 42,
+  "fields": {
+    "name": "Copii & Bebeluși",
+    "slug": "copii-bebelusi",
+    "description": "Produse pentru copii și bebeluși",
+    "icon": "fas fa-baby",
+    "parent": null,
+    "is_active": true,
+    "order": 5,
+    "created_at": "2025-09-11T16:27:34.438Z",
+    "updated_at": "2025-09-11T16:27:34.438Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 43,
+  "fields": {
+    "name": "Îmbrăcăminte Copii",
+    "slug": "imbracaminte-copii",
+    "description": "",
+    "icon": "",
+    "parent": 42,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-11T16:27:34.441Z",
+    "updated_at": "2025-09-11T16:27:34.441Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 44,
+  "fields": {
+    "name": "Jucării",
+    "slug": "jucarii",
+    "description": "",
+    "icon": "",
+    "parent": 42,
+    "is_active": true,
+    "order": 1,
+    "created_at": "2025-09-11T16:27:34.443Z",
+    "updated_at": "2025-09-11T16:27:34.443Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 45,
+  "fields": {
+    "name": "Cărți & Educație",
+    "slug": "carti-educatie",
+    "description": "",
+    "icon": "",
+    "parent": 42,
+    "is_active": true,
+    "order": 2,
+    "created_at": "2025-09-11T16:27:34.445Z",
+    "updated_at": "2025-09-11T16:27:34.445Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 46,
+  "fields": {
+    "name": "Produse pentru Bebeluși",
+    "slug": "produse-pentru-bebelusi",
+    "description": "",
+    "icon": "",
+    "parent": 42,
+    "is_active": true,
+    "order": 3,
+    "created_at": "2025-09-11T16:27:34.447Z",
+    "updated_at": "2025-09-11T16:27:34.447Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 47,
+  "fields": {
+    "name": "Cărucioare & Scaune Auto",
+    "slug": "carucioare-scaune-auto",
+    "description": "",
+    "icon": "",
+    "parent": 42,
+    "is_active": true,
+    "order": 4,
+    "created_at": "2025-09-11T16:27:34.449Z",
+    "updated_at": "2025-09-11T16:27:34.449Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 48,
+  "fields": {
+    "name": "Mobilier Copii",
+    "slug": "mobilier-copii",
+    "description": "",
+    "icon": "",
+    "parent": 42,
+    "is_active": true,
+    "order": 5,
+    "created_at": "2025-09-11T16:27:34.451Z",
+    "updated_at": "2025-09-11T16:27:34.451Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 49,
+  "fields": {
+    "name": "Cărți Fiction",
+    "slug": "carti-fiction",
+    "description": "",
+    "icon": "",
+    "parent": 45,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-11T16:27:34.454Z",
+    "updated_at": "2025-09-11T16:27:34.454Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 50,
+  "fields": {
+    "name": "Cărți Non-Fiction",
+    "slug": "carti-non-fiction",
+    "description": "",
+    "icon": "",
+    "parent": 45,
+    "is_active": true,
+    "order": 1,
+    "created_at": "2025-09-11T16:27:34.457Z",
+    "updated_at": "2025-09-11T16:27:34.457Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 51,
+  "fields": {
+    "name": "Manuale Școlare",
+    "slug": "manuale-scolare",
+    "description": "",
+    "icon": "",
+    "parent": 45,
+    "is_active": true,
+    "order": 2,
+    "created_at": "2025-09-11T16:27:34.459Z",
+    "updated_at": "2025-09-11T16:27:34.459Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 52,
+  "fields": {
+    "name": "Cursuri Online",
+    "slug": "cursuri-online",
+    "description": "",
+    "icon": "",
+    "parent": 45,
+    "is_active": true,
+    "order": 3,
+    "created_at": "2025-09-11T16:27:34.461Z",
+    "updated_at": "2025-09-11T16:27:34.461Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 53,
+  "fields": {
+    "name": "Materiale Educative",
+    "slug": "materiale-educative",
+    "description": "",
+    "icon": "",
+    "parent": 45,
+    "is_active": true,
+    "order": 4,
+    "created_at": "2025-09-11T16:27:34.463Z",
+    "updated_at": "2025-09-11T16:27:34.463Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 54,
+  "fields": {
+    "name": "Reviste",
+    "slug": "reviste",
+    "description": "",
+    "icon": "",
+    "parent": 45,
+    "is_active": true,
+    "order": 5,
+    "created_at": "2025-09-11T16:27:34.465Z",
+    "updated_at": "2025-09-11T16:27:34.465Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 55,
+  "fields": {
+    "name": "Servicii",
+    "slug": "servicii",
+    "description": "Diverse servicii profesionale",
+    "icon": "fas fa-tools",
+    "parent": null,
+    "is_active": true,
+    "order": 7,
+    "created_at": "2025-09-11T16:27:34.467Z",
+    "updated_at": "2025-09-11T16:27:34.467Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 56,
+  "fields": {
+    "name": "Servicii IT",
+    "slug": "servicii-it",
+    "description": "",
+    "icon": "",
+    "parent": 55,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-11T16:27:34.469Z",
+    "updated_at": "2025-09-11T16:27:34.469Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 57,
+  "fields": {
+    "name": "Reparații",
+    "slug": "reparatii",
+    "description": "",
+    "icon": "",
+    "parent": 55,
+    "is_active": true,
+    "order": 1,
+    "created_at": "2025-09-11T16:27:34.471Z",
+    "updated_at": "2025-09-11T16:27:34.471Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 58,
+  "fields": {
+    "name": "Curățenie",
+    "slug": "curatenie",
+    "description": "",
+    "icon": "",
+    "parent": 55,
+    "is_active": true,
+    "order": 2,
+    "created_at": "2025-09-11T16:27:34.474Z",
+    "updated_at": "2025-09-11T16:27:34.474Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 59,
+  "fields": {
+    "name": "Transport",
+    "slug": "transport",
+    "description": "",
+    "icon": "",
+    "parent": 55,
+    "is_active": true,
+    "order": 3,
+    "created_at": "2025-09-11T16:27:34.476Z",
+    "updated_at": "2025-09-11T16:27:34.476Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 60,
+  "fields": {
+    "name": "Evenimente",
+    "slug": "evenimente",
+    "description": "",
+    "icon": "",
+    "parent": 55,
+    "is_active": true,
+    "order": 4,
+    "created_at": "2025-09-11T16:27:34.478Z",
+    "updated_at": "2025-09-11T16:27:34.478Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 61,
+  "fields": {
+    "name": "Consultanță",
+    "slug": "consultanta",
+    "description": "",
+    "icon": "",
+    "parent": 55,
+    "is_active": true,
+    "order": 5,
+    "created_at": "2025-09-11T16:27:34.481Z",
+    "updated_at": "2025-09-11T16:27:34.481Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 62,
+  "fields": {
+    "name": "Design & Marketing",
+    "slug": "design-marketing",
+    "description": "",
+    "icon": "",
+    "parent": 55,
+    "is_active": true,
+    "order": 6,
+    "created_at": "2025-09-11T16:27:34.483Z",
+    "updated_at": "2025-09-11T16:27:34.483Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 63,
+  "fields": {
+    "name": "Animale",
+    "slug": "animale",
+    "description": "Animale de companie și accesorii",
+    "icon": "fas fa-paw",
+    "parent": null,
+    "is_active": true,
+    "order": 8,
+    "created_at": "2025-09-11T16:27:34.486Z",
+    "updated_at": "2025-09-11T16:27:34.486Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 64,
+  "fields": {
+    "name": "Câini",
+    "slug": "caini",
+    "description": "",
+    "icon": "",
+    "parent": 63,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-11T16:27:34.489Z",
+    "updated_at": "2025-09-11T16:27:34.489Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 65,
+  "fields": {
+    "name": "Pisici",
+    "slug": "pisici",
+    "description": "",
+    "icon": "",
+    "parent": 63,
+    "is_active": true,
+    "order": 1,
+    "created_at": "2025-09-11T16:27:34.491Z",
+    "updated_at": "2025-09-11T16:27:34.491Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 66,
+  "fields": {
+    "name": "Păsări",
+    "slug": "pasari",
+    "description": "",
+    "icon": "",
+    "parent": 63,
+    "is_active": true,
+    "order": 2,
+    "created_at": "2025-09-11T16:27:34.493Z",
+    "updated_at": "2025-09-11T16:27:34.493Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 67,
+  "fields": {
+    "name": "Pești & Acvariu",
+    "slug": "pesti-acvariu",
+    "description": "",
+    "icon": "",
+    "parent": 63,
+    "is_active": true,
+    "order": 3,
+    "created_at": "2025-09-11T16:27:34.495Z",
+    "updated_at": "2025-09-11T16:27:34.495Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 68,
+  "fields": {
+    "name": "Animale Mici",
+    "slug": "animale-mici",
+    "description": "",
+    "icon": "",
+    "parent": 63,
+    "is_active": true,
+    "order": 4,
+    "created_at": "2025-09-11T16:27:34.497Z",
+    "updated_at": "2025-09-11T16:27:34.497Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 69,
+  "fields": {
+    "name": "Hrană Animale",
+    "slug": "hrana-animale",
+    "description": "",
+    "icon": "",
+    "parent": 63,
+    "is_active": true,
+    "order": 5,
+    "created_at": "2025-09-11T16:27:34.499Z",
+    "updated_at": "2025-09-11T16:27:34.499Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 70,
+  "fields": {
+    "name": "Accesorii Animale",
+    "slug": "accesorii-animale",
+    "description": "",
+    "icon": "",
+    "parent": 63,
+    "is_active": true,
+    "order": 6,
+    "created_at": "2025-09-11T16:27:34.502Z",
+    "updated_at": "2025-09-11T16:27:34.502Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 71,
+  "fields": {
+    "name": "Altele",
+    "slug": "altele",
+    "description": "Diverse produse și servicii",
+    "icon": "fas fa-ellipsis-h",
+    "parent": null,
+    "is_active": true,
+    "order": 9,
+    "created_at": "2025-09-11T16:27:34.504Z",
+    "updated_at": "2025-09-11T16:27:34.504Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 72,
+  "fields": {
+    "name": "Antichități",
+    "slug": "antichitati",
+    "description": "",
+    "icon": "",
+    "parent": 71,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-11T16:27:34.506Z",
+    "updated_at": "2025-09-11T16:27:34.506Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 73,
+  "fields": {
+    "name": "Artă & Artizanat",
+    "slug": "arta-artizanat",
+    "description": "",
+    "icon": "",
+    "parent": 71,
+    "is_active": true,
+    "order": 1,
+    "created_at": "2025-09-11T16:27:34.508Z",
+    "updated_at": "2025-09-11T16:27:34.508Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 74,
+  "fields": {
+    "name": "Materiale Construcții",
+    "slug": "materiale-constructii",
+    "description": "",
+    "icon": "",
+    "parent": 71,
+    "is_active": true,
+    "order": 2,
+    "created_at": "2025-09-11T16:27:34.510Z",
+    "updated_at": "2025-09-11T16:27:34.510Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 75,
+  "fields": {
+    "name": "Echipamente Industriale",
+    "slug": "echipamente-industriale",
+    "description": "",
+    "icon": "",
+    "parent": 71,
+    "is_active": true,
+    "order": 3,
+    "created_at": "2025-09-11T16:27:34.512Z",
+    "updated_at": "2025-09-11T16:27:34.512Z"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 76,
+  "fields": {
+    "name": "Diverse",
+    "slug": "diverse",
+    "description": "",
+    "icon": "",
+    "parent": 71,
+    "is_active": true,
+    "order": 4,
+    "created_at": "2025-09-11T16:27:34.514Z",
+    "updated_at": "2025-09-11T16:27:34.514Z"
+  }
+},
+{
+  "model": "listings.listing",
+  "pk": 1,
+  "fields": {
+    "title": "Test Productie",
+    "slug": "test-productie",
+    "description": "un simplu test",
+    "price": "50.00",
+    "negotiable": true,
+    "condition": "good",
+    "owner": 1,
+    "category": 7,
+    "city": "București",
+    "county": "București",
+    "location": null,
+    "contact_phone": null,
+    "status": "active",
+    "is_featured": false,
+    "views_count": 8,
+    "created_at": "2025-09-11T16:28:20.912Z",
+    "updated_at": "2025-09-11T16:28:20.912Z",
+    "expires_at": null
+  }
+},
+{
+  "model": "listings.listing",
+  "pk": 2,
+  "fields": {
+    "title": "Test cola",
+    "slug": "test-cola",
+    "description": "2 baxuri de cola",
+    "price": "15.00",
+    "negotiable": true,
+    "condition": "good",
+    "owner": 9,
+    "category": 76,
+    "city": "București",
+    "county": "București",
+    "location": "Ndjdjd",
+    "contact_phone": "078428778",
+    "status": "active",
+    "is_featured": false,
+    "views_count": 2,
+    "created_at": "2025-09-20T00:00:44.314Z",
+    "updated_at": "2025-09-20T00:00:44.314Z",
+    "expires_at": null
+  }
+},
+{
+  "model": "listings.listingimage",
+  "pk": 1,
+  "fields": {
+    "listing": 1,
+    "image": "listings/download_4mzB4TF.webp",
+    "alt_text": "Imagine pentru Test Productie",
+    "order": 0,
+    "created_at": "2025-09-11T16:28:20.975Z"
+  }
+},
+{
+  "model": "listings.listingimage",
+  "pk": 2,
+  "fields": {
+    "listing": 1,
+    "image": "listings/download_1_dHo6ouF.webp",
+    "alt_text": "Imagine pentru Test Productie",
+    "order": 0,
+    "created_at": "2025-09-11T16:28:21.042Z"
+  }
+},
+{
+  "model": "listings.listingimage",
+  "pk": 3,
+  "fields": {
+    "listing": 1,
+    "image": "listings/download_2_WmdPR4V.webp",
+    "alt_text": "Imagine pentru Test Productie",
+    "order": 0,
+    "created_at": "2025-09-11T16:28:21.045Z"
+  }
+},
+{
+  "model": "listings.listingimage",
+  "pk": 4,
+  "fields": {
+    "listing": 2,
+    "image": "listings/Screenshot_20250920_002544_TFT.webp",
+    "alt_text": "Imagine pentru Test cola",
+    "order": 0,
+    "created_at": "2025-09-20T00:00:44.318Z"
+  }
+}
+]

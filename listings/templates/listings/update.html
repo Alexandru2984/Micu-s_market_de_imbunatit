@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }} - Micu's Market{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ title }}</h1>
+                    <p class="text-gray-600">Modifică informațiile anunțului tău</p>
+                </div>
+                <div class="listing-header flex items-center gap-3">
+                    <a href="{% url 'listings:detail' slug=listing.slug %}">
+                        <i class="fas fa-eye"></i>
+                        Vezi anunțul
+                    </a>
+                    <a href="{% url 'listings:my_listings' %}" class="secondary">
+                        <i class="fas fa-arrow-left"></i>
+                        Înapoi
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <form method="post" enctype="multipart/form-data" class="space-y-6 p-6">
+                {% csrf_token %}
+                
+                <!-- Basic Info Section -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Informații generale</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Titlu -->
+                        <div class="md:col-span-2">
+                            <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.title.label }}
+                                <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.title }}
+                            {% if form.title.errors %}
+                                <div class="mt-1 text-sm text-red-600">
+                                    {% for error in form.title.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Categorie -->
+                        <div>
+                            <label for="{{ form.category.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.category.label }}
+                                <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.category }}
+                            {% if form.category.errors %}
+                                <div class="mt-1 text-sm text-red-600">
+                                    {% for error in form.category.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Preț -->
+                        <div>
+                            <label for="{{ form.price.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.price.label }}
+                                <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.price }}
+                            {% if form.price.errors %}
+                                <div class="mt-1 text-sm text-red-600">
+                                    {% for error in form.price.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Locație -->
+                        <div>
+                            <label for="{{ form.city.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.city.label }}
+                                <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.city }}
+                            {% if form.city.errors %}
+                                <div class="mt-1 text-sm text-red-600">
+                                    {% for error in form.city.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Județ -->
+                        <div>
+                            <label for="{{ form.county.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.county.label }}
+                            </label>
+                            {{ form.county }}
+                            {% if form.county.errors %}
+                                <div class="mt-1 text-sm text-red-600">
+                                    {% for error in form.county.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Adresă completă -->
+                        <div class="md:col-span-2">
+                            <label for="{{ form.location.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.location.label }}
+                                <span class="text-gray-400">(opțional)</span>
+                            </label>
+                            {{ form.location }}
+                            {% if form.location.errors %}
+                                <div class="mt-1 text-sm text-red-600">
+                                    {% for error in form.location.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Stare produs -->
+                        <div>
+                            <label for="{{ form.condition.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.condition.label }}
+                            </label>
+                            {{ form.condition }}
+                            {% if form.condition.errors %}
+                                <div class="mt-1 text-sm text-red-600">
+                                    {% for error in form.condition.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Telefon -->
+                        <div>
+                            <label for="{{ form.contact_phone.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ form.contact_phone.label }}
+                                <span class="text-gray-400">(opțional)</span>
+                            </label>
+                            {{ form.contact_phone }}
+                            {% if form.contact_phone.errors %}
+                                <div class="mt-1 text-sm text-red-600">
+                                    {% for error in form.contact_phone.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Negociabil -->
+                        <div class="md:col-span-2">
+                            <div class="flex items-center">
+                                {{ form.negotiable }}
+                                <label for="{{ form.negotiable.id_for_label }}" class="ml-2 text-sm text-gray-700">
+                                    {{ form.negotiable.label }}
+                                </label>
+                            </div>
+                            {% if form.negotiable.errors %}
+                                <div class="mt-1 text-sm text-red-600">
+                                    {% for error in form.negotiable.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description Section -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Descriere</h2>
+                    
+                    <div>
+                        <label for="{{ form.description.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                            {{ form.description.label }}
+                            <span class="text-red-500">*</span>
+                        </label>
+                        {{ form.description }}
+                        {% if form.description.errors %}
+                            <div class="mt-1 text-sm text-red-600">
+                                {% for error in form.description.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <p class="mt-2 text-sm text-gray-500">
+                            Descrie produsul sau serviciul în detaliu.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Images Section -->
+                <div class="pb-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center justify-between image-section-header">
+                        <span>Imagini</span>
+                        <a href="{% url 'listings:upload_images' slug=listing.slug %}">
+                            <i class="fas fa-plus"></i>
+                            Gestionează imagini separat
+                        </a>
+                    </h2>
+                    <p class="text-sm text-gray-600 mb-4">Modifică imaginile existente sau adaugă altele noi (maxim 5MB per imagine)</p>
+                    
+                    {{ formset.management_form }}
+                    
+                    <div id="image-forms">
+                        {% for form in formset %}
+                            <div class="image-form-row{% if not form.instance.pk %} empty-form{% endif %}">
+                                {{ form.id }}
+                                
+                                <!-- Current Image Display -->
+                                {% if form.instance.image %}
+                                    <div class="current-image-display">
+                                        <img src="{{ form.instance.image.url }}" alt="{{ form.instance.alt_text }}">
+                                        <div class="current-image-label">
+                                            <i class="fas fa-image"></i>
+                                            Imagine curentă
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                <div class="image-form-grid">
+                                    <!-- Imagine -->
+                                    <div>
+                                        <label class="image-form-label">
+                                            <i class="fas fa-camera"></i>
+                                            {{ form.image.label }}
+                                        </label>
+                                        <div class="file-input-wrapper">
+                                            {{ form.image }}
+                                            <div class="file-input-display">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <div class="file-input-text">
+                                                    <span class="main-text">Alege imagine</span>
+                                                    <span class="sub-text">JPG, PNG (max 5MB)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% if form.image.errors %}
+                                            <div class="mt-1 text-sm text-red-600">
+                                                {% for error in form.image.errors %}
+                                                    <p>{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <!-- Alt text -->
+                                    <div>
+                                        <label class="image-form-label">
+                                            <i class="fas fa-tag"></i>
+                                            {{ form.alt_text.label }}
+                                        </label>
+                                        <input type="text" name="{{ form.alt_text.name }}" 
+                                               value="{{ form.alt_text.value|default:'' }}"
+                                               class="alt-text-input"
+                                               placeholder="Descriere scurtă a imaginii"
+                                               {% if form.alt_text.field.required %}required{% endif %}>
+                                        {% if form.alt_text.errors %}
+                                            <div class="mt-1 text-sm text-red-600">
+                                                {% for error in form.alt_text.errors %}
+                                                    <p>{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <!-- Delete checkbox -->
+                                {% if form.DELETE %}
+                                    <div class="delete-image-section">
+                                        <label class="delete-checkbox-wrapper">
+                                            {{ form.DELETE }}
+                                            <i class="fas fa-trash-alt"></i>
+                                            <span class="delete-text">Șterge această imagine</span>
+                                        </label>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Submit Buttons -->
+                <div class="form-actions pt-6 border-t border-gray-200">
+                    <div class="form-actions-left">
+                        <a href="{% url 'listings:detail' slug=listing.slug %}" class="btn-cancel">
+                            <i class="fas fa-times"></i>
+                            Anulează
+                        </a>
+                        <a href="{% url 'listings:delete' slug=listing.slug %}" class="btn-delete">
+                            <i class="fas fa-trash-alt"></i>
+                            Șterge anunțul
+                        </a>
+                    </div>
+                    
+                    <button type="submit" class="btn-save">
+                        <i class="fas fa-save"></i>
+                        Salvează modificările
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/image-upload.js' %}"></script>
+{% endblock %}

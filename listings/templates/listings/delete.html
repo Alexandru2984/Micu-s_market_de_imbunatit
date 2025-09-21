@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Șterge anunț - Micu's Market{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center gap-3">
+                <a href="{% url 'listings:detail' slug=listing.slug %}" class="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div>
+                    <h1 class="text-3xl font-bold text-red-600 mb-2">Șterge anunț</h1>
+                    <p class="text-gray-600">Această acțiune nu poate fi anulată</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Warning Card -->
+        <div class="bg-red-50 border border-red-200 rounded-xl p-6 mb-8">
+            <div class="flex items-start">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-triangle text-red-500 text-xl"></i>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-lg font-semibold text-red-800 mb-2">Atenție!</h3>
+                    <p class="text-red-700">
+                        Ești pe cale să ștergi definitiv acest anunț. Toate informațiile asociate, inclusiv imaginile, 
+                        vor fi șterse permanent și nu vor putea fi recuperate.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Listing Preview -->
+        <div class="listing-preview-card mb-8">
+            <div class="listing-preview-header">
+                <i class="fas fa-eye"></i>
+                <span>Anunț care va fi șters</span>
+            </div>
+            
+            <div class="listing-preview-content">
+                <!-- Image Section -->
+                <div class="listing-image-container" onclick="openImageModal()">
+                    {% if listing.main_image %}
+                        <img src="{{ listing.images.first.image.url }}" alt="{{ listing.title }}" class="listing-main-image" id="preview-image">
+                        <div class="image-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    {% else %}
+                        <div class="listing-no-image">
+                            <i class="fas fa-image"></i>
+                            <span>Fără imagine</span>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Content Section -->
+                <div class="listing-details">
+                    <div class="listing-title-section">
+                        <h3 class="listing-title">{{ listing.title }}</h3>
+                        <div class="listing-price">{{ listing.price|floatformat:0 }} RON</div>
+                    </div>
+                    
+                    <div class="listing-meta-grid">
+                        <div class="meta-item">
+                            <i class="fas fa-tag"></i>
+                            <span>{{ listing.category.name }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ listing.city }}, {{ listing.county }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>{{ listing.created_at|date:"d M Y" }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-eye"></i>
+                            <span>{{ listing.views_count }} vizualizări</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-images"></i>
+                            <span>{{ listing.images.count }} imagini</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-info-circle"></i>
+                            <span>{{ listing.get_condition_display }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="listing-description">
+                        <div class="description-label">
+                            <i class="fas fa-align-left"></i>
+                            Descriere
+                        </div>
+                        <p class="description-text">
+                            {{ listing.description|truncatewords:30 }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirmation Form -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                
+                <div class="border-l-4 border-yellow-400 bg-yellow-50 p-4 rounded-r-lg">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-yellow-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-yellow-800">
+                                Ce se va întâmpla:
+                            </h3>
+                            <ul class="mt-2 text-sm text-yellow-700 list-disc list-inside space-y-1">
+                                <li>Anunțul va fi șters definitiv din baza de date</li>
+                                <li>Toate imaginile asociate vor fi șterse de pe server</li>
+                                <li>Linkurile către acest anunț nu vor mai funcționa</li>
+                                <li>Datele nu vor putea fi recuperate</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Confirmation Checkbox -->
+                <div class="flex items-start space-x-3">
+                    <input type="checkbox" id="confirm-delete" name="confirm" required 
+                           class="mt-1 h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                    <label for="confirm-delete" class="text-sm text-gray-700">
+                        <span class="font-medium">Confirm că vreau să șterg acest anunț definitiv.</span>
+                        <br>
+                        <span class="text-gray-500">Înțeleg că această acțiune nu poate fi anulată.</span>
+                    </label>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="delete-actions pt-6 border-t border-gray-200">
+                    <div class="delete-actions-left">
+                        <a href="{% url 'listings:detail' slug=listing.slug %}" class="btn-back">
+                            <i class="fas fa-arrow-left"></i>
+                            Înapoi la anunț
+                        </a>
+                        <a href="{% url 'listings:my_listings' %}" class="btn-cancel">
+                            Anulează
+                        </a>
+                    </div>
+                    
+                    <button type="submit" id="delete-button" disabled class="btn-delete-final">
+                        <i class="fas fa-trash-alt"></i>
+                        Șterge definitiv
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Image Modal -->
+<div id="imageModal" class="image-modal" onclick="closeImageModal()">
+    <div class="image-modal-content">
+        <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
+        <img id="modalImage" class="modal-image" src="" alt="">
+        <div class="image-modal-info">
+            <h3 id="modalTitle"></h3>
+            <p id="modalPrice"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const checkbox = document.getElementById('confirm-delete');
+    const button = document.getElementById('delete-button');
+    
+    checkbox.addEventListener('change', function() {
+        button.disabled = !this.checked;
+        if (this.checked) {
+            button.classList.remove('btn-disabled');
+            button.classList.add('btn-delete-final-active');
+        } else {
+            button.classList.add('btn-disabled');
+            button.classList.remove('btn-delete-final-active');
+        }
+    });
+});
+
+function openImageModal() {
+    const previewImage = document.getElementById('preview-image');
+    if (!previewImage) return; // Nu face nimic dacă nu există imagine
+    
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalPrice = document.getElementById('modalPrice');
+    
+    modal.style.display = "block";
+    modalImg.src = previewImage.src;
+    modalImg.alt = previewImage.alt;
+    modalTitle.textContent = "{{ listing.title }}";
+    modalPrice.textContent = "{{ listing.price|floatformat:0 }} RON";
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+    
+    // Animation
+    setTimeout(() => {
+        modal.classList.add('show');
+    }, 10);
+}
+
+function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.remove('show');
+    
+    setTimeout(() => {
+        modal.style.display = "none";
+        document.body.style.overflow = 'auto';
+    }, 300);
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeImageModal();
+    }
+});
+</script>
+{% endblock %}

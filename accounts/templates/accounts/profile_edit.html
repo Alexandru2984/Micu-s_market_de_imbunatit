@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Editează profilul - Micu's Market{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile-edit.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="edit-profile-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1><i class="fas fa-user-edit me-2"></i>Editează profilul</h1>
+                <p class="mb-0">Actualizează informațiile tale personale și imaginea de profil</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="row">
+            <div class="col-lg-4">
+                <!-- Secțiunea pentru avatar -->
+                <div class="profile-form-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-camera me-2"></i>Imagine de profil
+                    </h3>
+                    
+                    <div class="avatar-upload-section">
+                        {% if profile.avatar %}
+                            <img src="{{ profile.avatar.url }}" alt="Avatar actual" class="current-avatar">
+                        {% else %}
+                            <div class="default-avatar-large">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        {% endif %}
+                        
+                        <div class="mb-3">
+                            {{ form.avatar }}
+                        </div>
+                        
+                        <div class="upload-info">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Imaginea va fi redimensionată automat la 300x300px și comprimată pentru performanță optimă.
+                            <br>
+                            Formate acceptate: JPG, PNG, WebP (max 5MB)
+                        </div>
+                        
+                        <div id="avatar-preview" class="avatar-preview"></div>
+                    </div>
+                    
+                    {% if form.avatar.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.avatar.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="col-lg-8">
+                <!-- Informații personale -->
+                <div class="profile-form-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-user me-2"></i>Informații personale
+                    </h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="{{ form.first_name.id_for_label }}" class="form-label">{{ form.first_name.label }}</label>
+                            {{ form.first_name }}
+                            {% if form.first_name.errors %}
+                                <div class="text-danger">{{ form.first_name.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="{{ form.last_name.id_for_label }}" class="form-label">{{ form.last_name.label }}</label>
+                            {{ form.last_name }}
+                            {% if form.last_name.errors %}
+                                <div class="text-danger">{{ form.last_name.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label }}</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <div class="text-danger">{{ form.email.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.bio.id_for_label }}" class="form-label">{{ form.bio.label }}</label>
+                        {{ form.bio }}
+                        {% if form.bio.errors %}
+                            <div class="text-danger">{{ form.bio.errors }}</div>
+                        {% endif %}
+                        <small class="form-text text-muted">Spune-le altor utilizatori ceva despre tine (max 500 caractere)</small>
+                    </div>
+                </div>
+                
+                <!-- Informații de contact -->
+                <div class="profile-form-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-address-book me-2"></i>Informații de contact
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.phone.id_for_label }}" class="form-label">{{ form.phone.label }}</label>
+                        {{ form.phone }}
+                        {% if form.phone.errors %}
+                            <div class="text-danger">{{ form.phone.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="{{ form.city.id_for_label }}" class="form-label">{{ form.city.label }}</label>
+                            {{ form.city }}
+                            {% if form.city.errors %}
+                                <div class="text-danger">{{ form.city.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="{{ form.county.id_for_label }}" class="form-label">{{ form.county.label }}</label>
+                            {{ form.county }}
+                            {% if form.county.errors %}
+                                <div class="text-danger">{{ form.county.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.date_of_birth.id_for_label }}" class="form-label">{{ form.date_of_birth.label }}</label>
+                        {{ form.date_of_birth }}
+                        {% if form.date_of_birth.errors %}
+                            <div class="text-danger">{{ form.date_of_birth.errors }}</div>
+                        {% endif %}
+                        <small class="form-text text-muted">Această informație nu va fi făcută publică</small>
+                    </div>
+                </div>
+                
+                <!-- Butoane de acțiune -->
+                <div class="profile-form-section">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <a href="{% url 'accounts:profile' %}" class="btn btn-cancel">
+                                <i class="fas fa-times me-2"></i>Anulează
+                            </a>
+                            <button type="submit" class="btn btn-save-profile">
+                                <i class="fas fa-save me-2"></i>Salvează modificările
+                            </button>
+                        </div>
+                        
+                        <small class="text-muted">
+                            <i class="fas fa-shield-alt me-1"></i>
+                            Informațiile tale sunt protejate și securizate
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/image-compression.js' %}"></script>
+<script src="{% static 'js/profile-edit.js' %}"></script>
+{% endblock %}
