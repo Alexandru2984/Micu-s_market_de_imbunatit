@@ -1,7 +1,7 @@
 # Micu’s Market — Django Marketplace
 
-A production‑ready Django marketplace for listing & buying/selling items.  
-Includes authentication with email confirmation (django‑allauth), category tree with icons, image galleries per listing, user profiles with avatars, favorites, reviews, pagination, and a clean production deploy (Gunicorn + Nginx + HTTPS).
+A production-ready Django marketplace for listing & buying/selling items.  
+It includes authentication with email confirmation (django-allauth), a category tree with icons, image galleries per listing, user profiles with avatars, favorites, reviews, search & pagination, and a clean production deploy (Gunicorn + Nginx + HTTPS).
 
 > Project root assumed as `/home/micu/Micu_market`. Adjust paths for your environment.
 
@@ -10,29 +10,29 @@ Includes authentication with email confirmation (django‑allauth), category tre
 ## ✨ Features
 
 - **Listings**: title, price, condition, negotiable, slug URLs, location (county/city), contact phone, status, images (gallery).
-- **Categories**: parent/child hierarchy, `order` for sorting, `icon` (Font Awesome class), `is_active` toggle.
-- **Auth**: email login & verification via **django‑allauth**; custom templates in `templates/account/`.
+- **Categories**: parent/child hierarchy, `order` for sorting, Font Awesome `icon` class, `is_active` toggle.
+- **Auth**: email login & verification via **django-allauth**; custom templates under `templates/account/`.
 - **Profiles**: avatar (stored in `media/`), basic user info.
-- **Reviews & ratings**: per user, average + pagination (template: `reviews/user_reviews.html`).
+- **Reviews & ratings**: per user (average, pagination).
 - **Favorites**, **search & filters**, **pagination**.
-- **.env‑driven settings** (DEBUG, DB, email, hosts, CSRF, security).
-- **Prod setup**: Gunicorn (systemd) + Nginx + Let’s Encrypt certificates.
+- **.env-driven settings** (DEBUG, DB, email, hosts, CSRF, security).
+- **Production setup**: Gunicorn (systemd) + Nginx + Let’s Encrypt.
 
 ---
 
 ## 🧱 Stack
 
 - Python **3.12**
-- Django **5.x** (logs show 5.2.5)
+- Django **5.x**
 - PostgreSQL (recommended)
-- django‑allauth
+- django-allauth
 - Pillow (image processing)
 - Gunicorn + Nginx (prod)
 - Font Awesome (icons)
 
 ---
 
-## 🗂️ Structure (overview)
+## 🗂️ Project Structure (overview)
 
 ```
 Micu_market/
@@ -57,13 +57,13 @@ Micu_market/
 
 ## 🚀 Local Development
 
-1. **Clone & enter**
+1) **Clone & enter**
 ```bash
 git clone <repo-url> Micu_market
 cd Micu_market
 ```
 
-2. **Virtualenv & deps**
+2) **Virtual environment & deps**
 ```bash
 python3.12 -m venv venv
 source venv/bin/activate
@@ -71,9 +71,9 @@ pip install -U pip wheel
 pip install -r requirements.txt
 ```
 
-3. **Configuration** — create **`.env`** (see template below or download `.env.example`).
+3) **Configuration** — create **`.env`** (see template below or keep a `.env.example` in the repo).
 
-4. **Database** (Postgres)
+4) **Database (PostgreSQL)**
 ```bash
 sudo -u postgres psql
 CREATE DATABASE micu_market ENCODING 'UTF8';
@@ -82,25 +82,25 @@ GRANT ALL PRIVILEGES ON DATABASE micu_market TO micu_market_user;
 \q
 ```
 
-5. **Migrate & superuser**
+5) **Migrate & create superuser**
 ```bash
 python manage.py migrate
 python manage.py createsuperuser
 ```
 
-6. **Run dev server**
+6) **Run dev server**
 ```bash
 python manage.py runserver
 ```
 Open http://127.0.0.1:8000/
 
-> **Dev email**: set `EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend` in `.env` so allauth confirmation links print in your terminal.
+> For dev emails (allauth confirmations), set `EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend` in `.env` so links print in your terminal.
 
 ---
 
-## 🔐 `.env` Example
+## 🔐 `.env` example
 
-Create `.env` in the project root:
+Create a `.env` file in the project root:
 
 ```dotenv
 # ----- Core -----
@@ -118,7 +118,7 @@ DB_USER=micu_market_user
 DB_PASSWORD=change-me
 DB_HOST=127.0.0.1
 DB_PORT=5432
-# Or, if settings support it:
+# Or:
 # DATABASE_URL=postgres://micu_market_user:change-me@127.0.0.1:5432/micu_market
 
 # ----- Email (allauth) -----
@@ -140,7 +140,7 @@ SESSION_COOKIE_SECURE=True
 CSRF_COOKIE_SECURE=True
 ```
 
-Make sure `settings.py` reads these via `os.getenv`/`environ`. Keep `.env` out of git.
+Ensure `settings.py` reads these via `os.getenv`/`environ`. Keep `.env` **out of git**.
 
 ---
 
@@ -155,6 +155,7 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = os.getenv('ACCOUNT_DEFAULT_HTTP_PROTOCOL', 'http
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/'
 ```
+
 For slow SMTP, prefer port **587 + TLS** and `EMAIL_TIMEOUT=5`. In production, consider sending emails asynchronously (Celery or a threaded override of `DefaultAccountAdapter.send_mail`).
 
 ---
@@ -169,7 +170,7 @@ For slow SMTP, prefer port **587 + TLS** and `EMAIL_TIMEOUT=5`. In production, c
 
 ## 🧪 Seed Data
 
-> Works with your models: `Category` (`name`, `slug`, `icon`, `parent`, `order`, `is_active`) and `Listing` (+ `ListingImage` with `related_name='images'`).
+> Works with these models: `Category` (`name`, `slug`, `icon`, `parent`, `order`, `is_active`) and `Listing` (+ `ListingImage` with `related_name='images'`).
 
 ### A) Seed a small category tree + demo listings
 ```py
@@ -186,14 +187,14 @@ if not owner.has_usable_password():
     owner.set_password("seed1234"); owner.save(update_fields=["password"])
 
 CATS = [
-    ("Electronice", "fa-solid fa-mobile-screen", [
-        ("Telefoane", "fa-solid fa-mobile-screen-button"),
-        ("Laptopuri", "fa-solid fa-laptop"),
+    ("Electronics", "fa-solid fa-mobile-screen", [
+        ("Phones", "fa-solid fa-mobile-screen-button"),
+        ("Laptops", "fa-solid fa-laptop"),
         ("Audio", "fa-solid fa-headphones-simple"),
     ]),
-    ("Vehicule", "fa-solid fa-car", [
-        ("Autoturisme", "fa-solid fa-car-side"),
-        ("Motociclete", "fa-solid fa-motorcycle"),
+    ("Vehicles", "fa-solid fa-car", [
+        ("Cars", "fa-solid fa-car-side"),
+        ("Motorcycles", "fa-solid fa-motorcycle"),
     ]),
 ]
 
@@ -219,8 +220,8 @@ for cat in leaf:
     for i in range(2):
         Listing.objects.create(
             owner=owner,
-            title=f"{cat.name} – produs {i+1}",
-            description=f"Anunț demo în {cat.name}. #SEED",
+            title=f"{cat.name} – item {i+1}",
+            description=f"Demo listing in {cat.name}. #SEED",
             price=Decimal(random.choice([49.99, 120, 199.9, 299, 899])),
             negotiable=random.choice([True, False]),
             status="active",
@@ -243,7 +244,7 @@ created = 0
 for lst in Listing.objects.all():
     if not lst.images.exists():
         img = Image.new("RGB", (1200, 800), color=(235,235,235))
-        d = ImageDraw.Draw(img); d.text((40,40), (lst.title or "Anunț")[:28], fill=(50,50,50))
+        d = ImageDraw.Draw(img); d.text((40,40), (lst.title or "Listing")[:28], fill=(50,50,50))
         buf = BytesIO(); img.save(buf, format="JPEG", quality=85)
         ListingImage.objects.create(listing=lst, image=ContentFile(buf.getvalue(), name=f"{(lst.slug or 'listing')}_placeholder.jpg"))
         created += 1
@@ -279,7 +280,7 @@ pip install -r requirements.txt
 
 # env
 cp .env.example .env  # or create based on README
-# IMPORTANT: set DEBUG=False in production, set allowed hosts and CSRF trusted origins properly
+# IMPORTANT: set DEBUG=False in production, and set allowed hosts/CSRF trusted origins
 
 python manage.py migrate
 python manage.py collectstatic --noinput
@@ -372,10 +373,10 @@ Also set **Sites** (Django admin) to `market.micutu.com`.
 ## 🛠️ Troubleshooting
 
 - **TemplateDoesNotExist** (`account/login.html`) → keep templates in `templates/account/…` (singular). Restart Gunicorn.
-- **BadMigrationError (no Migration class)** → delete placeholder/bad migration files and rerun `python manage.py migrate`.
-- **Old code served** → kill stray Gunicorn instances; manage via systemd (`sudo systemctl restart gunicorn`).
-- **Signup slow** → SMTP; use port 587 + `EMAIL_TIMEOUT=5` or async sending.
-- **Detail page fails with no images** → add placeholder or template fallback.
+- **BadMigrationError (no Migration class)** → delete placeholder/bad migration files and re-run `python manage.py migrate`.
+- **Serving old code** → kill stray Gunicorn processes; manage via systemd (`sudo systemctl restart gunicorn`).
+- **Signup/reset slow** → SMTP; use port 587 + `EMAIL_TIMEOUT=5` or async sending.
+- **Listing detail fails with no images** → add placeholders or a template fallback.
 
 ---
 
@@ -391,7 +392,6 @@ python-dotenv
 gunicorn
 ```
 
-Install:
 ```bash
 pip install -r requirements.txt
 ```
@@ -400,47 +400,42 @@ pip install -r requirements.txt
 
 ## 🧹 Helpers
 
-Dump/load:
+Dump/load small datasets:
 ```bash
 python manage.py dumpdata categories.Category listings.Listing listings.ListingImage --indent 2 > backup_seed.json
 python manage.py loaddata backup_seed.json
 ```
 
-Delete user by email (shell):
+Delete users by email (shell):
 ```py
 from django.contrib.auth import get_user_model
 User = get_user_model()
-User.objects.filter(email__iexact="test@exemplu.com").exclude(is_superuser=True).delete()
+User.objects.filter(email__iexact="test@example.com").exclude(is_superuser=True).delete()
 ```
 
 ---
-🧭 Roadmap / Planned Improvements
 
-Incremental, deployable phases for evolving the project.
+## 🧭 Roadmap / Planned Improvements
 
-Phase 0 — Housekeeping (quick wins)
+**Incremental, deployable phases** for evolving the project.
 
-Performance: add .select_related() / .prefetch_related() where needed.
+### Phase 0 — Housekeeping (quick wins)
+- Performance: add `.select_related()` / `.prefetch_related()` where needed.
+- Images: thumbnails + WebP (e.g., `easy-thumbnails` or `sorl-thumbnail`).
+- Caching: Redis + per-view / fragment cache on home, category, detail.
+- Email deliverability: SPF, DKIM, DMARC for `market.micutu.com`.
+- Error tracking: Sentry (server + browser).
 
-Images: thumbnails + WebP (e.g., easy-thumbnails or sorl-thumbnail).
-
-Caching: Redis + per-view / fragment cache on home, category, detail.
-
-Email deliverability: SPF, DKIM, DMARC for market.micutu.com.
-
-Error tracking: Sentry (server + browser).
-
-Phase 1 — Public API (Django REST Framework)
-
+### Phase 1 — Public API (Django REST Framework)
 Expose a stable REST API for future frontend/mobile.
 
-Install
-
+**Install**
+```
 pip install djangorestframework drf-spectacular django-cors-headers
+```
 
-
-settings.py
-
+**settings.py**
+```python
 INSTALLED_APPS += ["rest_framework", "drf_spectacular", "corsheaders"]
 MIDDLEWARE = ["corsheaders.middleware.CorsMiddleware", *MIDDLEWARE]
 CORS_ALLOWED_ORIGINS = [
@@ -454,10 +449,10 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 24,
 }
 SPECTACULAR_SETTINGS = {"TITLE": "Micu’s Market API", "VERSION": "1.0.0"}
+```
 
-
-api/serializers.py
-
+**api/serializers.py**
+```python
 from rest_framework import serializers
 from listings.models import Listing
 from categories.models import Category
@@ -478,10 +473,10 @@ class ListingSerializer(serializers.ModelSerializer):
 
     def get_images(self, obj):
         return [im.image.url for im in obj.images.all()[:6]]
+```
 
-
-api/views.py
-
+**api/views.py**
+```python
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -505,10 +500,10 @@ class ListingViewSet(ReadOnlyModelViewSet):
             qs = qs.filter(title__icontains=q)
         page = self.paginate_queryset(qs)
         return self.get_paginated_response(self.get_serializer(page, many=True).data)
+```
 
-
-api/urls.py
-
+**api/urls.py**
+```python
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
@@ -523,24 +518,20 @@ urlpatterns = [
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
     path("docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="docs"),
 ]
-
-
-Main urls.py:
-
+```
+Main `urls.py`:
+```python
 path("api/", include("api.urls")),
+```
 
-Phase 2 — Frontend modernization (React / Next.js)
+### Phase 2 — Frontend modernization (React / Next.js)
+Start with **progressive migration**:
+- Keep Django templates for auth/admin initially.
+- Build Next.js routes for **home, category list, search, listing detail**, consuming `/api/v1/*`.
+- Either hydrate in place (React widgets in Django templates) or route-by-route via Nginx sub-path.
 
-Start with progressive migration:
-
-Keep Django templates for auth/admin initially.
-
-Build Next.js routes for home, category list, search, listing detail, consuming /api/v1/*.
-
-Either hydrate in place (React widgets in Django templates) or route-by-route via Nginx sub-path.
-
-Next.js example
-
+**Next.js example**
+```ts
 export default async function ListingsPage() {
   const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/api/v1/listings/?page=1", { cache: "no-store" });
   const data = await res.json();
@@ -555,59 +546,42 @@ export default async function ListingsPage() {
     </main>
   );
 }
+```
+**Auth options**: Cookie-based session with **dj-rest-auth + allauth** (same domain) or JWT (requires refresh rotation & CSRF care).
+
+### Phase 3 — Search & Discovery
+- Start with **PostgreSQL full-text** (GIN index).
+- Later adopt **Meilisearch**/Elasticsearch for typo-tolerance & facets.
+- Filters: price, condition, location, category.
+
+### Phase 4 — Messaging & Notifications
+- **Django Channels / WebSockets** for seller–buyer chat.
+- **Celery + Redis** for background jobs (email, thumbnails, scheduled cleanups).
+- In-site notifications + email digests (daily/weekly).
+
+### Phase 5 — Payments (optional)
+- Stripe (Checkout / Payment Links). On webhook → mark `Listing` as `reserved` or `sold`.
+
+### Phase 6 — Media & CDN
+- Move uploads to S3/Spaces with **django-storages**.
+- Serve via CDN (CloudFront/Cloudflare). Generate multiple sizes (thumb/card/full).
+
+### Phase 7 — Observability & QA
+- Sentry, optionally OpenTelemetry.
+- CI/CD with GitHub Actions: tests, ruff/black/isort, mypy, build Docker, deploy to VPS/staging.
+
+### Phase 8 — Security Hardening
+- Ensure `SECURE_*` flags with `DEBUG=False`.
+- CSP headers (whitelist assets).
+- Rate limiting for login/reset (django-axes or Nginx `limit_req`).
+- User content moderation (report/ban, shadow-ban, audit trail).
+
+### Phase 9 — UX & SEO
+- SSR via Next.js; sitemaps; Open Graph tags.
+- Accessibility checks (ARIA, focus states).
+- Better listing form UX (drag-drop upload, client-side resize).
 
 
-Auth options: Cookie-based session with dj-rest-auth + allauth (same domain) or JWT (requires refresh rotation & CSRF care).
-
-Phase 3 — Search & Discovery
-
-Start with PostgreSQL full-text (GIN index).
-
-Later adopt Meilisearch/Elasticsearch for typo-tolerance & facets.
-
-Filters: price, condition, location, category.
-
-Phase 4 — Messaging & Notifications
-
-Django Channels / WebSockets for seller–buyer chat.
-
-Celery + Redis for background jobs (email, thumbnails, scheduled cleanups).
-
-In-site notifications + email digests (daily/weekly).
-
-Phase 5 — Payments (optional)
-
-Stripe (Checkout / Payment Links). On webhook → mark Listing as reserved or sold.
-
-Phase 6 — Media & CDN
-
-Move uploads to S3/Spaces with django-storages.
-
-Serve via CDN (CloudFront/Cloudflare). Generate multiple sizes (thumb/card/full).
-
-Phase 7 — Observability & QA
-
-Sentry, optionally OpenTelemetry.
-
-CI/CD with GitHub Actions: tests, ruff/black/isort, mypy, build Docker, deploy to VPS/staging.
-
-Phase 8 — Security Hardening
-
-Ensure SECURE_* flags with DEBUG=False.
-
-CSP headers (whitelist assets).
-
-Rate limiting for login/reset (django-axes or Nginx limit_req).
-
-User content moderation (report/ban, shadow-ban, audit trail).
-
-Phase 9 — UX & SEO
-
-SSR via Next.js; sitemaps; Open Graph tags.
-
-Accessibility checks (ARIA, focus states).
-
-Better listing form UX (drag-drop upload, client-side resize).
 
 ## © License
 
