@@ -49,7 +49,6 @@ Micu_market/
 │  ├─ base.html
 │  ├─ base_auth.html         # extends base.html
 │  ├─ account/               # allauth overrides
-│  └─ reviews/user_reviews.html
 ├─ static/
 └─ media/
 ```
@@ -415,6 +414,200 @@ User.objects.filter(email__iexact="test@exemplu.com").exclude(is_superuser=True)
 ```
 
 ---
+🧭 Roadmap / Planned Improvements
+
+Incremental, deployable phases for evolving the project.
+
+Phase 0 — Housekeeping (quick wins)
+
+Performance: add .select_related() / .prefetch_related() where needed.
+
+Images: thumbnails + WebP (e.g., easy-thumbnails or sorl-thumbnail).
+
+Caching: Redis + per-view / fragment cache on home, category, detail.
+
+Email deliverability: SPF, DKIM, DMARC for market.micutu.com.
+
+Error tracking: Sentry (server + browser).
+
+Phase 1 — Public API (Django REST Framework)
+
+Expose a stable REST API for future frontend/mobile.
+
+Install
+
+pip install djangorestframework drf-spectacular django-cors-headers
+
+
+settings.py
+
+INSTALLED_APPS += ["rest_framework", "drf_spectacular", "corsheaders"]
+MIDDLEWARE = ["corsheaders.middleware.CorsMiddleware", *MIDDLEWARE]
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+    "https://market.micutu.com",
+]
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 24,
+}
+SPECTACULAR_SETTINGS = {"TITLE": "Micu’s Market API", "VERSION": "1.0.0"}
+
+
+api/serializers.py
+
+from rest_framework import serializers
+from listings.models import Listing
+from categories.models import Category
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ["id", "name", "slug", "icon", "parent"]
+
+class ListingSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True)
+    images = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Listing
+        fields = ["id","title","slug","price","condition","negotiable",
+                  "category","city","county","location","status","images"]
+
+    def get_images(self, obj):
+        return [im.image.url for im in obj.images.all()[:6]]
+
+
+api/views.py
+
+from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from listings.models import Listing
+from categories.models import Category
+from .serializers import ListingSerializer, CategorySerializer
+
+class CategoryViewSet(ReadOnlyModelViewSet):
+    queryset = Category.objects.filter(is_active=True).order_by("order","name")
+    serializer_class = CategorySerializer
+
+class ListingViewSet(ReadOnlyModelViewSet):
+    queryset = Listing.objects.filter(status="active").select_related("category").prefetch_related("images")
+    serializer_class = ListingSerializer
+
+    @action(detail=False)
+    def search(self, request):
+        q = request.query_params.get("q","").strip()
+        qs = self.get_queryset()
+        if q:
+            qs = qs.filter(title__icontains=q)
+        page = self.paginate_queryset(qs)
+        return self.get_paginated_response(self.get_serializer(page, many=True).data)
+
+
+api/urls.py
+
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from .views import ListingViewSet, CategoryViewSet
+
+router = DefaultRouter()
+router.register("categories", CategoryViewSet, basename="category")
+router.register("listings", ListingViewSet, basename="listing")
+
+urlpatterns = [
+    path("v1/", include(router.urls)),
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="docs"),
+]
+
+
+Main urls.py:
+
+path("api/", include("api.urls")),
+
+Phase 2 — Frontend modernization (React / Next.js)
+
+Start with progressive migration:
+
+Keep Django templates for auth/admin initially.
+
+Build Next.js routes for home, category list, search, listing detail, consuming /api/v1/*.
+
+Either hydrate in place (React widgets in Django templates) or route-by-route via Nginx sub-path.
+
+Next.js example
+
+export default async function ListingsPage() {
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/api/v1/listings/?page=1", { cache: "no-store" });
+  const data = await res.json();
+  return (
+    <main className="container">
+      {data.results.map((x:any) => (
+        <article key={x.id}>
+          <h3>{x.title}</h3>
+          <p>{x.price} RON • {x.city}</p>
+        </article>
+      ))}
+    </main>
+  );
+}
+
+
+Auth options: Cookie-based session with dj-rest-auth + allauth (same domain) or JWT (requires refresh rotation & CSRF care).
+
+Phase 3 — Search & Discovery
+
+Start with PostgreSQL full-text (GIN index).
+
+Later adopt Meilisearch/Elasticsearch for typo-tolerance & facets.
+
+Filters: price, condition, location, category.
+
+Phase 4 — Messaging & Notifications
+
+Django Channels / WebSockets for seller–buyer chat.
+
+Celery + Redis for background jobs (email, thumbnails, scheduled cleanups).
+
+In-site notifications + email digests (daily/weekly).
+
+Phase 5 — Payments (optional)
+
+Stripe (Checkout / Payment Links). On webhook → mark Listing as reserved or sold.
+
+Phase 6 — Media & CDN
+
+Move uploads to S3/Spaces with django-storages.
+
+Serve via CDN (CloudFront/Cloudflare). Generate multiple sizes (thumb/card/full).
+
+Phase 7 — Observability & QA
+
+Sentry, optionally OpenTelemetry.
+
+CI/CD with GitHub Actions: tests, ruff/black/isort, mypy, build Docker, deploy to VPS/staging.
+
+Phase 8 — Security Hardening
+
+Ensure SECURE_* flags with DEBUG=False.
+
+CSP headers (whitelist assets).
+
+Rate limiting for login/reset (django-axes or Nginx limit_req).
+
+User content moderation (report/ban, shadow-ban, audit trail).
+
+Phase 9 — UX & SEO
+
+SSR via Next.js; sitemaps; Open Graph tags.
+
+Accessibility checks (ARIA, focus states).
+
+Better listing form UX (drag-drop upload, client-side resize).
 
 ## © License
 
