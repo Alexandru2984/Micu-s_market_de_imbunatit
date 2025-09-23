@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 # ======================
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# încarcă variabile din .env (plasat lângă manage.py)
+# Variables from .env (next to manage.py)
 load_dotenv(BASE_DIR / ".env")
 
 # ======================
@@ -32,16 +32,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.sites",  # necesar pentru allauth
+    "django.contrib.sites",  #allauth
 
     # allauth
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    # "allauth.socialaccount.providers.google",  # dacă vrei Google login
-    # "allauth.socialaccount.providers.facebook",  # dacă vrei Facebook login
+    # "allauth.socialaccount.providers.google",  #Google login
+    # "allauth.socialaccount.providers.facebook",  #Facebook login
 
-    # apps proiect
+    # apps 
     "pages",
     "accounts",
     "listings",
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     "notifications",
     "dashboard",
     "api",
-    # "ws",  # doar dacă ai app ws
+    # "ws",  # later for weebsockets
 ]
 
 MIDDLEWARE = [
@@ -72,14 +72,14 @@ ROOT_URLCONF = "Micu_market.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],  # PRIORITATE: template-uri globale
-        "APP_DIRS": True,  # apoi template-urile din aplicații
+        "DIRS": [BASE_DIR / "templates"],  # priority: global templates
+        "APP_DIRS": True,  # applications templates
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "django.template.context_processors.request",  # necesar pentru allauth
+                "django.template.context_processors.request",  #needed for allauth
             ],
         },
     },
@@ -135,7 +135,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-# Security settings pentru producție
+# Security settings
 if not DEBUG:
     SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "True") == "True"
     SECURE_HSTS_SECONDS = int(os.getenv("SECURE_HSTS_SECONDS", "31536000"))
@@ -167,15 +167,15 @@ AUTHENTICATION_BACKENDS = [
 # Custom adapter pentru username auto-generat
 ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
 
-# Allauth settings (sintaxa nouă)
+# Allauth settings
 ACCOUNT_LOGIN_METHODS = {'email'}
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
 ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
-# ACCOUNT_USERNAME_REQUIRED = False  # DEPRECATED - folosim ACCOUNT_SIGNUP_FIELDS
+# ACCOUNT_USERNAME_REQUIRED = False  # DEPRECATED - using ACCOUNT_SIGNUP_FIELDS
 
-# Signup fields (înlocuiește ACCOUNT_USERNAME_REQUIRED)
+# Signup fields (ACCOUNT_USERNAME_REQUIRED)
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 
 # Auto-generate username from email
@@ -184,7 +184,7 @@ ACCOUNT_SESSION_REMEMBER = True
 
 # Rate limits
 ACCOUNT_RATE_LIMITS = {
-    'login_failed': '5/5m',  # 5 încercări la 5 minute
+    'login_failed': '5/5m',  # 5 tries in 5 minutes
 }
 
 # Email confirmation settings
@@ -213,15 +213,16 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 # EMAIL SETTINGS
 # ======================
 # Email backend for production
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.getenv('EMAIL_HOST', 'micutu.com')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT', '465'))
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'False') == 'True'
-EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'True') == 'True'
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'market@micutu.com')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Micu\'s Market <market@micutu.com>')
-SERVER_EMAIL = os.getenv('SERVER_EMAIL', 'server@micutu.com')
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend")
 
-# Email backend for development (decomentează pentru testare în consolă)
+EMAIL_HOST = os.getenv("EMAIL_HOST", "micutu.com")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", "465"))
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "False") == "True"
+EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", "True") == "True"
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "market@micutu.com")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Micu's Market <market@micutu.com>")
+SERVER_EMAIL = os.getenv("SERVER_EMAIL", "server@micutu.com")
+
+# Email backend for development
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
