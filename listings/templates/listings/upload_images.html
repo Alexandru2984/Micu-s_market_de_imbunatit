@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container mx-auto px-4 py-8">
     <div class="max-w-4xl mx-auto">
-        <!-- Header -->
+        <!-- header -->
         <div class="mb-8">
             <div class="flex items-center justify-between">
                 <div>
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <!-- Listing Info -->
+        <!-- listing info -->
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
             <div class="flex items-center space-x-4">
                 <div class="flex-shrink-0">
@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <!-- Current Images -->
+        <!-- current images -->
         {% if listing.images.exists %}
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
                 <h2 class="text-xl font-semibold text-gray-900 mb-4">Imagini curente</h2>
@@ -75,7 +75,7 @@
             </div>
         {% endif %}
 
-        <!-- Upload Form -->
+        <!-- upload form -->
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <div class="p-6">
                 <h2 class="text-xl font-semibold text-gray-900 mb-4">Adaugă imagini noi</h2>
@@ -88,12 +88,12 @@
                     
                     <div id="image-forms" class="space-y-4">
                         {% for form in formset %}
-                            {% if not form.instance.pk %}  <!-- Doar formele pentru imagini noi -->
+                            {% if not form.instance.pk %}  
                                 <div class="image-form-row border border-gray-200 rounded-lg p-4">
                                     {{ form.id }}
                                     
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <!-- Imagine -->
+                                        <!-- image -->
                                         <div>
                                             <label class="block text-sm font-medium text-gray-700 mb-2">
                                                 {{ form.image.label }}
@@ -108,7 +108,7 @@
                                             {% endif %}
                                         </div>
 
-                                        <!-- Alt text -->
+                                        <!-- alt text -->
                                         <div>
                                             <label class="block text-sm font-medium text-gray-700 mb-2">
                                                 {{ form.alt_text.label }}
@@ -131,7 +131,7 @@
                         {% endfor %}
                     </div>
 
-                    <!-- Submit Buttons -->
+                    <!-- submit buttons -->
                     <div class="flex items-center justify-between pt-6 border-t border-gray-200">
                         <a href="{% url 'listings:detail' slug=listing.slug %}" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
                             Înapoi la anunț
@@ -146,7 +146,7 @@
             </div>
         </div>
 
-        <!-- Tips -->
+        <!-- tips -->
         <div class="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
             <h3 class="text-lg font-semibold text-blue-900 mb-3">
                 <i class="fas fa-lightbulb mr-2"></i>
@@ -184,8 +184,8 @@
 <script>
 function deleteImage(imageId) {
     if (confirm('Ești sigur că vrei să ștergi această imagine?')) {
-        // Aici ar trebui implementată logica AJAX pentru ștergerea imaginii
-        // Pentru moment, vom redirecta către pagina de editare
+        // i should update this with ajax or something else
+        // i ll redirect it, at least for now
         window.location.href = "{% url 'listings:update' slug=listing.slug %}";
     }
 }

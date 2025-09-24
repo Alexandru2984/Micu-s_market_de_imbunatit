@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="{% static 'css/buttons.css' %}">
 <link rel="stylesheet" href="{% static 'css/spectacular-elements.css' %}">
 <style>
-/* ANIMAȚII PENTRU BUTOANE SPECTACULOASE */
 @keyframes pulse {
     0%, 100% { 
         transform: scale(1); 
@@ -44,7 +43,6 @@
     }
 }
 
-/* GLOW EFFECTS */
 #searchButton::before {
     content: "";
     position: absolute;
@@ -95,7 +93,7 @@
 {% block content %}
 <div class="listings-page">
     <div class="container">
-        <!-- Breadcrumb -->
+        <!-- breadcrumb -->
         <nav class="breadcrumb-nav">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -126,7 +124,7 @@
             </ol>
         </nav>
 
-        <!-- Header cu titlu și filtre -->
+        <!-- header -->
         <div class="listings-header">
             <div class="header-content">
                 <h1>
@@ -168,7 +166,7 @@
             </div>
         </div>
         
-        <!-- Quick Search Bar -->
+        <!-- quick search bar -->
         <div class="quick-search-section">
             <div class="quick-search-container">
                 <form method="get" class="quick-search-form">
@@ -225,9 +223,9 @@
             </div>
         </div>
         
-        <!-- Layout principal -->
+        <!-- main layout -->
         <div class="listings-layout">
-            <!-- Sidebar filtre -->
+            <!-- sidebar -->
             <aside class="filters-sidebar">
                 <div class="filters-card">
                     <div class="filters-header">
@@ -235,7 +233,7 @@
                     </div>
                     
                     <form method="get" class="filters-form" id="filtersForm">
-                        <!-- Căutare -->
+                        <!-- search -->
                         <div class="filter-group">
                             <label for="search" class="filter-label">
                                 <i class="fas fa-search"></i>
@@ -248,7 +246,7 @@
                             </div>
                         </div>
                         
-                        <!-- Categoria -->
+                        <!-- category -->
                         <div class="filter-group">
                             <label for="category" class="filter-label">
                                 <i class="fas fa-tags"></i>
@@ -268,7 +266,7 @@
                             </div>
                         </div>
                         
-                        <!-- Prețul -->
+                        <!-- price -->
                         <div class="filter-group">
                             <label class="filter-label">
                                 <i class="fas fa-euro-sign"></i>
@@ -330,7 +328,7 @@
                             </div>
                         </div>
                         
-                        <!-- Orașul -->
+                        <!-- city -->
                         <div class="filter-group">
                             <label for="city" class="filter-label">
                                 <i class="fas fa-map-marker-alt"></i>
@@ -355,7 +353,7 @@
                             </div>
                         </div>
                         
-                        <!-- Sortarea -->
+                        <!-- sorting -->
                         <div class="filter-group">
                             <label for="sort" class="filter-label">
                                 <i class="fas fa-sort"></i>
@@ -400,10 +398,10 @@
                 </div>
             </aside>
             
-            <!-- Conținutul principal -->
+            <!-- main content -->
             <main class="listings-main">
                 {% if page_obj %}
-                    <!-- Grila cu anunțuri -->
+                    <!-- listing grid -->
                     <div class="listings-grid">
                         {% for listing in page_obj %}
                             <a href="{% url 'listings:detail' listing.slug %}" class="listing-card">
@@ -440,7 +438,7 @@
                         {% endfor %}
                     </div>
                     
-                    <!-- Paginare -->
+                    <!-- pagination -->
                     {% if page_obj.has_other_pages %}
                         <div class="pagination">
                             {% if page_obj.has_previous %}
@@ -472,7 +470,7 @@
                     {% endif %}
                     
                 {% else %}
-                    <!-- Stare goală -->
+                    <!-- condition -->
                     <div class="no-listings">
                         <i class="fas fa-search"></i>
                         <h3>Nu am găsit anunțuri</h3>

@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container mx-auto px-4 py-8">
     <div class="max-w-6xl mx-auto">
-        <!-- Header -->
+        <!-- header -->
         <div class="mb-8">
             <div class="flex items-center justify-between">
                 <div>
@@ -21,7 +21,7 @@
         </div>
 
         {% if page_obj %}
-            <!-- Statistics -->
+            <!-- statistics -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                     <div class="flex items-center">
@@ -86,13 +86,13 @@
                 </div>
             </div>
 
-            <!-- Listings Grid -->
+            <!-- listing grid -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="space-y-4 p-6">
                     {% for listing in page_obj %}
                         <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors">
                             <div class="flex items-center space-x-4">
-                                <!-- Image -->
+                                <!-- image -->
                                 <div class="flex-shrink-0">
                                     {% if listing.main %}
                                         <img src="{{ listing.main.image.url }}" alt="{{ listing.title }}" class="w-16 h-16 object-cover rounded-lg border">
@@ -103,12 +103,12 @@
                                     {% endif %}
                                 </div>
                                 
-                                <!-- Content -->
+                                <!-- content -->
                                 <div class="flex-1 min-w-0">
                                     <div class="flex items-center gap-3 mb-2">
                                         <h3 class="text-lg font-semibold text-gray-900 truncate">{{ listing.title }}</h3>
                                         
-                                        <!-- Status Badge -->
+                                        <!-- status badge -->
                                         {% if listing.status == 'active' %}
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                                 <i class="fas fa-check-circle mr-1"></i>
@@ -152,7 +152,7 @@
                                 </div>
                             </div>
                             
-                            <!-- Actions -->
+                            <!-- actions -->
                             <div class="flex items-center space-x-2">
                                 <a href="{% url 'listings:detail' slug=listing.slug %}" class="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" title="Vezi anunțul">
                                     <i class="fas fa-eye"></i>
@@ -171,7 +171,7 @@
                     {% endfor %}
                 </div>
                 
-                <!-- Pagination -->
+                <!-- pagination -->
                 {% if page_obj.has_other_pages %}
                     <div class="border-t border-gray-200 px-6 py-4 bg-gray-50">
                         <div class="flex items-center justify-between">
@@ -202,7 +202,7 @@
                 {% endif %}
             </div>
         {% else %}
-            <!-- Empty State -->
+            <!-- empty state -->
             <div class="text-center py-16">
                 <div class="max-w-md mx-auto">
                     <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">

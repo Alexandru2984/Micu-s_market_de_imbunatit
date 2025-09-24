@@ -9,10 +9,8 @@ from listings.models import Listing
 
 @login_required
 def favorites_list_view(request):
-    """Lista anunțurilor favorite ale utilizatorului"""
     favorites = Favorite.objects.filter(user=request.user).select_related('listing', 'listing__category', 'listing__owner').prefetch_related('listing__images')
     
-    # Paginare
     paginator = Paginator(favorites, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -26,7 +24,6 @@ def favorites_list_view(request):
 @login_required
 @require_POST
 def toggle_favorite_view(request):
-    """Toggle favorite pentru un anunț (AJAX)"""
     listing_id = request.POST.get('listing_id')
     
     if not listing_id:
@@ -35,7 +32,7 @@ def toggle_favorite_view(request):
     try:
         listing = get_object_or_404(Listing, id=listing_id, status='active')
         
-        # Verifică dacă utilizatorul nu încearcă să adauge propriul anunț
+        # check if user wants to add to favorites his own listings
         if listing.owner == request.user:
             return JsonResponse({'error': 'Nu poți adăuga propriile anunțuri la favorite'}, status=400)
         
@@ -45,12 +42,11 @@ def toggle_favorite_view(request):
         )
         
         if not created:
-            # Dacă favoritul există deja, îl șterge
             favorite.delete()
             is_favorited = False
             message = 'Anunțul a fost eliminat din favorite'
         else:
-            # Dacă nu există, l-a creat
+            # if favorite doesn t exist, create it
             is_favorited = True
             message = 'Anunțul a fost adăugat la favorite'
         
@@ -70,7 +66,6 @@ def toggle_favorite_view(request):
 
 @login_required
 def remove_favorite_view(request, favorite_id):
-    """Șterge un favorit din lista de favorite"""
     favorite = get_object_or_404(Favorite, id=favorite_id, user=request.user)
     listing_title = favorite.listing.title
     favorite.delete()

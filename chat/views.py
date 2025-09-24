@@ -16,7 +16,6 @@ User = get_user_model()
 
 @login_required
 def inbox_view(request):
-    """Inbox-ul cu toate conversațiile utilizatorului"""
     conversations = Conversation.objects.filter(
         participants=request.user,
         is_active=True
@@ -24,11 +23,10 @@ def inbox_view(request):
         unread_count=Count('messages', filter=Q(messages__receiver=request.user, messages__is_read=False))
     ).order_by('-updated_at')
     
-    # Adaugă celălalt participant la fiecare conversație
+    # add other participant to conversation
     for conversation in conversations:
         conversation.other_participant = conversation.get_other_participant(request.user)
     
-    # Paginare
     paginator = Paginator(conversations, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -41,25 +39,20 @@ def inbox_view(request):
 
 @login_required
 def conversation_view(request, pk):
-    """View pentru o conversație specifică"""
     conversation = get_object_or_404(
         Conversation.objects.select_related('listing').prefetch_related('participants'),
         pk=pk,
         participants=request.user
     )
     
-    # Marchează mesajele ca citite
     conversation.mark_as_read(request.user)
     
-    # Obține mesajele
     messages_list = conversation.messages.select_related('sender', 'receiver').prefetch_related('attachments').order_by('created_at')
     
-    # Paginare pentru mesaje
     paginator = Paginator(messages_list, 50)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
-    # Celălalt participant
     other_participant = conversation.get_other_participant(request.user)
     
     context = {
@@ -72,19 +65,18 @@ def conversation_view(request, pk):
 
 @login_required
 def start_conversation_view(request, listing_slug):
-    """Începe o conversație nouă despre un anunț"""
     try:
         listing = get_object_or_404(Listing, slug=listing_slug, status='active')
         
-        # Debug info
+        # debug
         print(f"DEBUG: User {request.user} wants to chat about listing '{listing.title}' owned by {listing.owner}")
         
-        # Nu permite utilizatorului să înceapă conversație cu sine însuși
+        # can t start a conversation with yourself
         if listing.owner == request.user:
             messages.error(request, "Nu poți începe o conversație cu tine însuți.")
             return redirect('listings:detail', slug=listing_slug)
         
-        # Verifică dacă există deja o conversație
+        # check for existing conversation
         existing_conversation = Conversation.objects.filter(
             listing=listing,
             participants=request.user
@@ -94,11 +86,11 @@ def start_conversation_view(request, listing_slug):
             messages.info(request, "Conversația există deja!")
             return redirect('chat:conversation', pk=existing_conversation.pk)
         
-        # Creează conversația nouă
+        # new conversation
         conversation = Conversation.objects.create(listing=listing)
         conversation.participants.add(request.user, listing.owner)
         
-        # Mesaj de welcome automat
+        # automated welcome message
         welcome_message = f"Salut! Sunt interessat de anunțul tău '{listing.title}'."
         Message.objects.create(
             conversation=conversation,
@@ -118,7 +110,6 @@ def start_conversation_view(request, listing_slug):
 @login_required
 @require_POST
 def send_message_view(request, conversation_pk):
-    """Trimite un mesaj într-o conversație"""
     conversation = get_object_or_404(
         Conversation,
         pk=conversation_pk,
@@ -129,10 +120,9 @@ def send_message_view(request, conversation_pk):
     if not content:
         return JsonResponse({'error': 'Mesajul nu poate fi gol.'}, status=400)
     
-    # Determină destinatarul
     receiver = conversation.get_other_participant(request.user)
     
-    # Creează mesajul
+    # create message
     message = Message.objects.create(
         conversation=conversation,
         sender=request.user,
@@ -140,7 +130,7 @@ def send_message_view(request, conversation_pk):
         content=content
     )
     
-    # Procesează atașamentele dacă există
+    # processing atachments
     if 'attachments' in request.FILES:
         for file in request.FILES.getlist('attachments'):
             MessageAttachment.objects.create(
@@ -148,7 +138,7 @@ def send_message_view(request, conversation_pk):
                 file=file
             )
     
-    # Returnează răspunsul JSON pentru AJAX
+    # JSON response for ajax
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return JsonResponse({
             'success': True,
@@ -171,7 +161,6 @@ def send_message_view(request, conversation_pk):
 
 @login_required
 def search_users_view(request):
-    """Caută utilizatori pentru a începe o conversație"""
     query = request.GET.get('q', '').strip()
     users = []
     
@@ -196,7 +185,6 @@ def search_users_view(request):
 
 @login_required
 def get_unread_count(request):
-    """Returnează numărul de mesaje necitite"""
     count = Message.objects.filter(
         receiver=request.user,
         is_read=False
@@ -206,7 +194,6 @@ def get_unread_count(request):
 
 @login_required
 def mark_conversation_read(request, pk):
-    """Marchează o conversație ca citită"""
     conversation = get_object_or_404(
         Conversation,
         pk=pk,

@@ -58,7 +58,7 @@ class CustomAuthenticationForm(AuthenticationForm):
     }))
 
 class UserProfileForm(forms.ModelForm):
-    # Câmpuri pentru User
+    # user fields
     first_name = forms.CharField(
         max_length=30, 
         required=False,
@@ -124,11 +124,11 @@ class UserProfileForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        # Extrage user-ul din kwargs
+        # extract user from kwargs
         self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
         
-        # Populează câmpurile User dacă există
+        # fill user fields if it exists
         if self.user:
             self.fields['first_name'].initial = self.user.first_name
             self.fields['last_name'].initial = self.user.last_name
@@ -137,7 +137,7 @@ class UserProfileForm(forms.ModelForm):
     def save(self, commit=True):
         profile = super().save(commit=False)
         
-        # Actualizează câmpurile User
+        # update user fields
         if self.user:
             self.user.first_name = self.cleaned_data['first_name']
             self.user.last_name = self.cleaned_data['last_name']
@@ -152,11 +152,11 @@ class UserProfileForm(forms.ModelForm):
     def clean_avatar(self):
         avatar = self.cleaned_data.get('avatar')
         if avatar:
-            # Verifică dimensiunea fișierului (max 5MB)
+            # check file size (max 5MB)
             if avatar.size > 5 * 1024 * 1024:
                 raise forms.ValidationError('Imaginea nu poate fi mai mare de 5MB.')
             
-            # Verifică tipul fișierului
+            # check file type
             valid_extensions = ['jpg', 'jpeg', 'png', 'webp']
             ext = avatar.name.split('.')[-1].lower()
             if ext not in valid_extensions:

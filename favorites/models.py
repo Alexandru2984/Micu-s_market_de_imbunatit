@@ -19,7 +19,6 @@ class Favorite(models.Model):
 
 
 class SavedSearch(models.Model):
-    """Căutări salvate de utilizatori pentru notificări"""
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='saved_searches', verbose_name="Utilizator")
     name = models.CharField(max_length=100, verbose_name="Nume căutare")
     search_query = models.CharField(max_length=200, blank=True, verbose_name="Termen căutare")
@@ -42,7 +41,6 @@ class SavedSearch(models.Model):
         return f"{self.user.username} - {self.name}"
     
     def get_search_params(self):
-        """Returnează parametrii de căutare ca dicționar"""
         params = {}
         if self.search_query:
             params['q'] = self.search_query

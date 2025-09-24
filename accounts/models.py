@@ -19,7 +19,7 @@ class UserProfile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
-    # Statistici
+    # stats
     total_listings = models.IntegerField(default=0, verbose_name="Total anunțuri")
     total_sales = models.IntegerField(default=0, verbose_name="Total vânzări")
     average_rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.00, verbose_name="Rating mediu")
@@ -34,7 +34,7 @@ class UserProfile(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         
-        # Redimensionează avatarul
+        # avatar resize
         if self.avatar:
             img_path = self.avatar.path
             with Image.open(img_path) as img:
@@ -54,13 +54,13 @@ class UserProfile(models.Model):
         from listings.models import Listing
         from reviews.models import Review
         
-        # Actualizează numărul total de anunțuri active
+        # update active number of listings
         self.total_listings = self.user.listings.filter(status='active').count()
         
-        # Actualizează numărul de vânzări
+        # update number of sales
         self.total_sales = self.user.listings.filter(status='sold').count()
         
-        # Actualizează rating-ul mediu
+        # update rating
         reviews = Review.objects.filter(reviewed_user=self.user)
         if reviews.exists():
             total_rating = sum([review.rating for review in reviews])
@@ -71,7 +71,7 @@ class UserProfile(models.Model):
         self.save()
 
 
-# Signal pentru a crea automat un profil când se creează un user nou
+# signal to create a new profile when a user registers
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 

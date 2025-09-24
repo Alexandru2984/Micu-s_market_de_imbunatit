@@ -66,10 +66,10 @@ class ListingForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Toate categoriile active - temporar pentru debugging
+        # all categories active
         self.fields['category'].queryset = Category.objects.filter(is_active=True).order_by('name')
         
-        # Doar câmpurile principale sunt obligatorii
+        # only main field are mandatory
         required_fields = ['title', 'description', 'category', 'price', 'city']
         for field_name, field in self.fields.items():
             if field_name in required_fields:
@@ -87,7 +87,7 @@ class ListingForm(forms.ModelForm):
 
     def clean_contact_phone(self):
         phone = self.cleaned_data.get('contact_phone')
-        # Fără validări - orice text este acceptat
+        # no validations for now, any text it ll do just fine
         return phone
 
 
@@ -112,11 +112,11 @@ class ListingImageForm(forms.ModelForm):
     def clean_image(self):
         image = self.cleaned_data.get('image')
         if image:
-            # Verifică dimensiunea fișierului (max 5MB)
+            # check file size (max 5MB)
             if image.size > 5 * 1024 * 1024:
                 raise ValidationError('Imaginea nu poate fi mai mare de 5MB.')
             
-            # Verifică tipul fișierului
+            # check file type
             valid_extensions = ['jpg', 'jpeg', 'png', 'webp']
             ext = image.name.split('.')[-1].lower()
             if ext not in valid_extensions:
@@ -125,15 +125,15 @@ class ListingImageForm(forms.ModelForm):
         return image
 
 
-# Formset pentru multiple imagini
+# multiple images formset
 from django.forms import modelformset_factory
 
 ListingImageFormSet = modelformset_factory(
     ListingImage,
     form=ListingImageForm,
-    extra=3,  # 3 formulare goale în plus
-    max_num=10,  # Maximum 10 imagini
+    extra=3, 
+    max_num=10,  # 10 images max
     can_delete=True,
-    validate_min=False,  # Nu cere imagini obligatorii
-    min_num=0  # Minim 0 imagini
+    validate_min=False,  # no mandatory fields, for now
+    min_num=0  # no image mandatory
 )

@@ -14,7 +14,7 @@
                 {% csrf_token %}
                 
                 <div class="space-y-6">
-                    <!-- Titlu -->
+                    <!-- title -->
                     <div>
                         <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                             {{ form.title.label }} *
@@ -27,7 +27,7 @@
                         {% endif %}
                     </div>
 
-                    <!-- Descriere -->
+                    <!-- description -->
                     <div>
                         <label for="{{ form.description.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                             {{ form.description.label }} *
@@ -40,7 +40,7 @@
                         {% endif %}
                     </div>
 
-                    <!-- Categorie -->
+                    <!-- category -->
                     <div>
                         <label for="{{ form.category.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                             {{ form.category.label }} *
@@ -53,7 +53,7 @@
                         {% endif %}
                     </div>
 
-                    <!-- Preț -->
+                    <!-- price -->
                     <div>
                         <label for="{{ form.price.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                             {{ form.price.label }} *
@@ -66,7 +66,7 @@
                         {% endif %}
                     </div>
 
-                    <!-- Oraș -->
+                    <!-- city -->
                     <div>
                         <label for="{{ form.city.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                             {{ form.city.label }} *
@@ -79,7 +79,7 @@
                         {% endif %}
                     </div>
 
-                    <!-- Județ -->
+                    <!-- county -->
                     <div>
                         <label for="{{ form.county.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                             {{ form.county.label }}
@@ -92,7 +92,7 @@
                         {% endif %}
                     </div>
 
-                    <!-- Adresă -->
+                    <!-- adrees -->
                     <div>
                         <label for="{{ form.location.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                             {{ form.location.label }}
@@ -105,7 +105,7 @@
                         {% endif %}
                     </div>
 
-                    <!-- Telefon -->
+                    <!-- phone number -->
                     <div>
                         <label for="{{ form.contact_phone.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                             {{ form.contact_phone.label }}
@@ -118,7 +118,7 @@
                         {% endif %}
                     </div>
 
-                    <!-- Stare -->
+                    <!-- condition -->
                     <div>
                         <label for="{{ form.condition.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                             {{ form.condition.label }}
@@ -131,7 +131,7 @@
                         {% endif %}
                     </div>
 
-                    <!-- Negociabil -->
+                    <!-- negotiable -->
                     <div>
                         <div class="flex items-center">
                             {{ form.negotiable }}
@@ -146,7 +146,7 @@
                         {% endif %}
                     </div>
 
-                    <!-- Imagini -->
+                    <!-- images -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             Imagini (opțional)
@@ -154,7 +154,7 @@
                         <input type="file" name="images" multiple accept="image/*" class="form-control">
                     </div>
 
-                    <!-- Submit -->
+                    <!-- submit -->
                     <div class="pt-6">
                         <button type="submit" class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
                             Publică anunțul

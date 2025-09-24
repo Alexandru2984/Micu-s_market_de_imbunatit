@@ -8,11 +8,11 @@
 {% block content %}
 
 
-<!-- Listing Details -->
+<!-- listing details -->
 <section class="listing-detail">
     <div class="container">
         <div class="listing-content">
-            <!-- Image Gallery -->
+            <!-- image gallery -->
             <div class="image-gallery">
                 {% if listing.images.all %}
                     <div class="main-image">
@@ -42,7 +42,7 @@
                 {% endif %}
             </div>
             
-            <!-- Listing Info -->
+            <!-- listing info -->
             <div class="listing-info">
                 <div class="listing-header">
                     <h1>{{ listing.title }}</h1>
@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 
-                <!-- Actions -->
+                <!-- actions -->
                 <div class="listing-actions" style="position: static !important; opacity: 1 !important; display: flex !important; gap: 1rem !important;">
                     {% if user.is_authenticated and user != listing.owner %}
                         <a href="{% url 'chat:start_conversation' listing.slug %}" class="btn btn-primary">
@@ -123,7 +123,7 @@
             </div>
         </div>
         
-        <!-- Description -->
+        <!-- description -->
         <div class="description-section">
             <h2><i class="fas fa-info-circle"></i> Descriere</h2>
             <div class="description-content">
@@ -131,7 +131,7 @@
             </div>
         </div>
         
-        <!-- Seller Info -->
+        <!-- seller info -->
         <div class="seller-section">
             <h2><i class="fas fa-user"></i> Vânzător</h2>
             <div class="seller-info">
@@ -165,7 +165,7 @@
     </div>
 </section>
 
-<!-- Similar Listings -->
+<!-- similar listings -->
 {% if similar_listings %}
 <section class="similar-listings">
     <div class="container">
@@ -201,7 +201,6 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/listings.css' %}">
 <style>
-/* Design elegant pentru butonul de favorite - NU MAI PĂTRATE! */
 #favorite-detail-btn {
     background: transparent;
     border: none;

@@ -10,7 +10,6 @@ from .models import UserProfile
 from listings.models import Listing
 
 def register_view(request):
-    """Înregistrare utilizator nou"""
     if request.user.is_authenticated:
         return redirect('listings:home')
     
@@ -27,7 +26,6 @@ def register_view(request):
     return render(request, 'accounts/register.html', {'form': form})
 
 def login_view(request):
-    """Autentificare utilizator"""
     if request.user.is_authenticated:
         return redirect('listings:home')
     
@@ -48,18 +46,16 @@ def login_view(request):
     return render(request, 'account/login.html', {'form': form})
 
 def logout_view(request):
-    """Deconectare utilizator"""
     logout(request)
     messages.info(request, 'Te-ai deconectat cu succes!')
     return redirect('listings:home')
 
 @login_required
 def profile_view(request):
-    """Profilul utilizatorului curent"""
-    # Asigură-te că utilizatorul are un profil
+    # check if user has a profile
     profile, created = UserProfile.objects.get_or_create(user=request.user)
     
-    # Calculează statistici
+    # calculate stats
     user_stats = {
         'total_listings': Listing.objects.filter(owner=request.user).count(),
         'active_listings': Listing.objects.filter(owner=request.user, status='active').count(),
@@ -75,7 +71,6 @@ def profile_view(request):
 
 @login_required
 def profile_edit_view(request):
-    """Editează profilul utilizatorului"""
     profile, created = UserProfile.objects.get_or_create(user=request.user)
     
     if request.method == 'POST':
@@ -94,14 +89,13 @@ def profile_edit_view(request):
     return render(request, 'accounts/profile_edit.html', context)
 
 def public_profile_view(request, username):
-    """Profilul public al unui utilizator"""
     user = get_object_or_404(User, username=username)
     profile, created = UserProfile.objects.get_or_create(user=user)
     
-    # Anunțurile active ale utilizatorului
+    # active listings of user
     listings = Listing.objects.filter(owner=user, status='active').order_by('-created_at')[:6]
     
-    # Statistici publice
+    # public stats
     user_stats = {
         'total_listings': Listing.objects.filter(owner=user, status='active').count(),
         'member_since': user.date_joined,
@@ -118,10 +112,9 @@ def public_profile_view(request, username):
 
 @login_required
 def my_listings_view(request):
-    """Anunțurile utilizatorului"""
     listings = Listing.objects.filter(owner=request.user).order_by('-created_at')
     
-    # Filtrare după status
+    # filter by status
     status_filter = request.GET.get('status')
     if status_filter:
         listings = listings.filter(status=status_filter)

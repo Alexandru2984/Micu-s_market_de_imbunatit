@@ -24,7 +24,7 @@
     </div>
 </section>
 
-<!-- Favorites List -->
+<!-- favorites list -->
 <section class="favorites-section">
     <div class="container">
         {% if page_obj %}
@@ -74,7 +74,7 @@
                         </div>
                     </a>
                     
-                    <!-- Action Buttons -->
+                    <!-- action buttons -->
                     <div class="listing-actions">
                         <button class="remove-favorite-btn" data-favorite-id="{{ favorite.id }}" title="Elimină din favorite">
                             <i class="fas fa-trash"></i>
@@ -85,7 +85,7 @@
                 {% endfor %}
             </div>
             
-            <!-- Pagination -->
+            <!-- pagination -->
             {% if page_obj.has_other_pages %}
             <div class="pagination">
                 {% if page_obj.has_previous %}
@@ -107,7 +107,7 @@
             {% endif %}
             
         {% else %}
-            <!-- No Favorites -->
+            <!-- no favorites -->
             <div class="no-favorites">
                 <div class="no-favorites-content">
                     <i class="fas fa-heart-broken"></i>

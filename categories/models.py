@@ -25,7 +25,6 @@ class Category(models.Model):
     
     @property
     def get_all_children(self):
-        """Returnează toate subcategoriile recursiv"""
         children = list(self.subcategories.filter(is_active=True))
         for child in self.subcategories.filter(is_active=True):
             children.extend(child.get_all_children)

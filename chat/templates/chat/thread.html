@@ -8,7 +8,7 @@
 {% block content %}
 <div class="conversation-container">
     <div class="container">
-        <!-- Header conversație -->
+        <!-- conversation header -->
         <div class="conversation-header">
             <div class="header-left">
                 <a href="{% url 'chat:inbox' %}" class="back-btn">
@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <!-- Mesaje -->
+        <!-- messages -->
         <div class="messages-container" id="messagesContainer">
             <div class="messages-list" id="messagesList">
                 {% for message in page_obj reversed %}
@@ -63,7 +63,7 @@
                             <div class="message-bubble">
                                 <p>{{ message.content|linebreaks }}</p>
                                 
-                                <!-- Atașamente -->
+                                <!-- atachments -->
                                 {% if message.attachments.all %}
                                     <div class="message-attachments">
                                         {% for attachment in message.attachments.all %}
@@ -96,7 +96,7 @@
             </div>
         </div>
 
-        <!-- Form pentru mesaj nou -->
+        <!-- new message form -->
         <div class="message-form-container">
             <form id="messageForm" method="post" action="{% url 'chat:send_message' conversation.pk %}" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -187,7 +187,6 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Add message to UI
                 addMessageToUI(data.message);
                 
                 // Clear form
@@ -207,7 +206,6 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Eroare la trimiterea mesajului');
         })
         .finally(() => {
-            // Re-enable form
             sendBtn.disabled = false;
             sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
         });

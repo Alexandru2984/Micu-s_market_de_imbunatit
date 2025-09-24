@@ -19,7 +19,7 @@
                     <div class="conversation-card {% if conversation.unread_count > 0 %}unread{% endif %}">
                         <a href="{% url 'chat:conversation' conversation.pk %}" class="conversation-link">
                             <div class="conversation-info">
-                                <!-- Avatar celuilalt participant -->
+                                <!-- other person's avatar -->
                                 <div class="participant-avatar">
                                     {% if conversation.other_participant.profile.avatar %}
                                         <img src="{{ conversation.other_participant.profile.avatar.url }}" alt="{{ conversation.other_participant.username }}">
@@ -71,7 +71,7 @@
                 {% endfor %}
             </div>
             
-            <!-- Paginare -->
+            <!-- something -->
             {% if page_obj.has_other_pages %}
                 <div class="pagination">
                     {% if page_obj.has_previous %}

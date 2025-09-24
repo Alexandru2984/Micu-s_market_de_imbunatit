@@ -10,7 +10,7 @@
 {% block content %}
 <div class="container mx-auto px-4 py-8">
     <div class="max-w-4xl mx-auto">
-        <!-- Header -->
+        <!-- header -->
         <div class="mb-8">
             <div class="flex items-center justify-between">
                 <div>
@@ -24,17 +24,17 @@
             </div>
         </div>
 
-        <!-- Form -->
+        <!-- form -->
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <form method="post" enctype="multipart/form-data" class="space-y-6 p-6">
                 {% csrf_token %}
                 
-                <!-- Basic Info Section -->
+                <!-- basic info -->
                 <div class="border-b border-gray-200 pb-6">
                     <h2 class="text-xl font-semibold text-gray-900 mb-4">Informații generale</h2>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Titlu -->
+                        <!-- title -->
                         <div class="md:col-span-2">
                             <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                                 {{ form.title.label }}
@@ -50,7 +50,7 @@
                             {% endif %}
                         </div>
 
-                        <!-- Categorie -->
+                        <!-- category -->
                         <div>
                             <label for="{{ form.category.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                                 {{ form.category.label }}
@@ -66,7 +66,7 @@
                             {% endif %}
                         </div>
 
-                        <!-- Preț -->
+                        <!-- price -->
                         <div>
                             <label for="{{ form.price.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                                 {{ form.price.label }}
@@ -82,7 +82,7 @@
                             {% endif %}
                         </div>
 
-                        <!-- Locație -->
+                        <!-- location -->
                         <div>
                             <label for="{{ form.city.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                                 {{ form.city.label }}
@@ -98,7 +98,7 @@
                             {% endif %}
                         </div>
 
-                        <!-- Județ -->
+                        <!-- county -->
                         <div>
                             <label for="{{ form.county.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                                 {{ form.county.label }}
@@ -113,7 +113,7 @@
                             {% endif %}
                         </div>
 
-                        <!-- Adresă completă -->
+                        <!-- full adress -->
                         <div class="md:col-span-2">
                             <label for="{{ form.location.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                                 {{ form.location.label }}
@@ -129,7 +129,7 @@
                             {% endif %}
                         </div>
 
-                        <!-- Stare produs -->
+                        <!-- condition -->
                         <div>
                             <label for="{{ form.condition.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                                 {{ form.condition.label }}
@@ -144,7 +144,7 @@
                             {% endif %}
                         </div>
 
-                        <!-- Telefon -->
+                        <!-- phone number -->
                         <div>
                             <label for="{{ form.contact_phone.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
                                 {{ form.contact_phone.label }}
@@ -160,7 +160,7 @@
                             {% endif %}
                         </div>
 
-                        <!-- Negociabil -->
+                        <!-- negotiable -->
                         <div class="md:col-span-2">
                             <div class="flex items-center">
                                 {{ form.negotiable }}
@@ -179,7 +179,7 @@
                     </div>
                 </div>
 
-                <!-- Description Section -->
+                <!-- description section -->
                 <div class="border-b border-gray-200 pb-6">
                     <h2 class="text-xl font-semibold text-gray-900 mb-4">Descriere</h2>
                     
@@ -202,7 +202,7 @@
                     </div>
                 </div>
 
-                <!-- Images Section -->
+                <!-- images section -->
                 <div class="pb-6">
                     <h2 class="text-xl font-semibold text-gray-900 mb-4">Imagini</h2>
                     <p class="text-sm text-gray-600 mb-4">Adaugă până la 10 imagini pentru anunțul tău (maxim 5MB per imagine)</p>
@@ -222,7 +222,7 @@
                     </div>
                 </div>
 
-                <!-- Submit Buttons -->
+                <!-- submit buttons -->
                 <div class="flex items-center justify-between pt-6 border-t border-gray-200">
                     <a href="{% url 'listings:my_listings' %}" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
                         Anulează
