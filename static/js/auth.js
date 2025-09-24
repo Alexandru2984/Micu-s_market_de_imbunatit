@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Password strength checker
     const passwordInputs = document.querySelectorAll('input[type="password"]');
-    
+    const allowed = new Set(['password1', 'new_password1']); 
     passwordInputs.forEach(input => {
-        if (input.name === 'password1' || input.name === 'password') {
-            addPasswordStrengthChecker(input);
-        }
+    if (allowed.has(input.name) && !input.hasAttribute('data-no-meter')) {
+      addPasswordStrengthChecker(input);
+    }
     });
     
     // Form validation
