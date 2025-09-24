@@ -1,6 +1,6 @@
-# Schimba PROJECT_NAME cu numele proiectului
+
 Micu_market:
-  # ====== Pagini generale / landing ======
+  
   pages:
     - view_name: home
       url_path_name: home
@@ -22,7 +22,7 @@ Micu_market:
       url_path_name: privacy
       template_name: pages/privacy
 
-  # ====== Conturi / autentificare ======
+  
   accounts:
     - view_name: sign_up
       url_path_name: sign_up
@@ -56,7 +56,7 @@ Micu_market:
       url_path_name: profile_edit
       template_name: accounts/profile_edit
 
-  # ====== Anunturi (CRUD + browsare) ======
+  
   listings:
     - view_name: listing_list
       url_path_name: listing_list
@@ -86,7 +86,7 @@ Micu_market:
       url_path_name: upload_images
       template_name: listings/upload_images
 
-  # ====== Categorii si filtre ======
+  
   categories:
     - view_name: category_list
       url_path_name: category_list
@@ -100,7 +100,7 @@ Micu_market:
       url_path_name: subcategory_detail
       template_name: categories/subcategory_detail
 
-  # ====== Cautare si rezultate ======
+  
   search:
     - view_name: search
       url_path_name: search
@@ -114,7 +114,7 @@ Micu_market:
       url_path_name: saved_searches
       template_name: search/saved
 
-  # ====== Chat (mesaje intre utilizatori) ======
+  
   chat:
     - view_name: inbox
       url_path_name: inbox
@@ -128,7 +128,7 @@ Micu_market:
       url_path_name: new_message
       template_name: chat/new_message
 
-  # ====== Recenzii si rating ======
+  
   reviews:
     - view_name: reviews_for_user
       url_path_name: reviews_for_user
@@ -138,7 +138,7 @@ Micu_market:
       url_path_name: create_review
       template_name: reviews/create
 
-  # ====== Favorite / wishlist ======
+  
   favorites:
     - view_name: favorites_list
       url_path_name: favorites_list
@@ -148,7 +148,7 @@ Micu_market:
       url_path_name: toggle_favorite
       template_name: favorites/toggle
 
-  # ====== Notificari ======
+  # Va urma
   notifications:
     - view_name: notifications_list
       url_path_name: notifications_list
@@ -158,7 +158,7 @@ Micu_market:
       url_path_name: mark_read
       template_name: notifications/mark_read
 
-  # ====== Moderare / dashboard ======
+  # Va urma
   dashboard:
     - view_name: dashboard_home
       url_path_name: dashboard_home
@@ -172,21 +172,21 @@ Micu_market:
       url_path_name: verify_listings
       template_name: dashboard/verify_listings
 
-  # ====== API (daca generatorul tau creeaza si endpoints simple) ======
+  # Va urma pentru frontend react/svelte prin django rest framework
   api:
     - view_name: api_listing_list
       url_path_name: api_listing_list
-      template_name: api/listings_list  # placeholder
+      template_name: api/listings_list  
 
     - view_name: api_listing_detail
       url_path_name: api_listing_detail
-      template_name: api/listings_detail  # placeholder
+      template_name: api/listings_detail  
 
     - view_name: api_create_listing
       url_path_name: api_create_listing
-      template_name: api/create_listing  # placeholder
+      template_name: api/create_listing  
 
-  # ====== WebSocket / Channels (placeholder pentru templates simple) ======
+  # WebSocket va urma
   ws:
     - view_name: chat_room
       url_path_name: chat_room
