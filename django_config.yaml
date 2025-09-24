@@ -1,0 +1,197 @@
+# Schimba PROJECT_NAME cu numele proiectului
+Micu_market:
+  # ====== Pagini generale / landing ======
+  pages:
+    - view_name: home
+      url_path_name: home
+      template_name: pages/home
+
+    - view_name: about
+      url_path_name: about
+      template_name: pages/about
+
+    - view_name: contact
+      url_path_name: contact
+      template_name: pages/contact
+
+    - view_name: terms
+      url_path_name: terms
+      template_name: pages/terms
+
+    - view_name: privacy
+      url_path_name: privacy
+      template_name: pages/privacy
+
+  # ====== Conturi / autentificare ======
+  accounts:
+    - view_name: sign_up
+      url_path_name: sign_up
+      template_name: accounts/sign_up
+
+    - view_name: log_in
+      url_path_name: log_in
+      template_name: accounts/log_in
+
+    - view_name: log_out
+      url_path_name: log_out
+      template_name: accounts/log_out
+
+    - view_name: password_reset
+      url_path_name: password_reset
+      template_name: accounts/password_reset
+
+    - view_name: password_change
+      url_path_name: password_change
+      template_name: accounts/password_change
+
+    - view_name: email_verify
+      url_path_name: email_verify
+      template_name: accounts/email_verify
+
+    - view_name: profile
+      url_path_name: profile
+      template_name: accounts/profile
+
+    - view_name: profile_edit
+      url_path_name: profile_edit
+      template_name: accounts/profile_edit
+
+  # ====== Anunturi (CRUD + browsare) ======
+  listings:
+    - view_name: listing_list
+      url_path_name: listing_list
+      template_name: listings/list
+
+    - view_name: listing_detail
+      url_path_name: listing_detail
+      template_name: listings/detail
+
+    - view_name: listing_create
+      url_path_name: listing_create
+      template_name: listings/create
+
+    - view_name: listing_update
+      url_path_name: listing_update
+      template_name: listings/update
+
+    - view_name: listing_delete
+      url_path_name: listing_delete
+      template_name: listings/delete
+
+    - view_name: my_listings
+      url_path_name: my_listings
+      template_name: listings/my_listings
+
+    - view_name: upload_images
+      url_path_name: upload_images
+      template_name: listings/upload_images
+
+  # ====== Categorii si filtre ======
+  categories:
+    - view_name: category_list
+      url_path_name: category_list
+      template_name: categories/list
+
+    - view_name: category_detail
+      url_path_name: category_detail
+      template_name: categories/detail
+
+    - view_name: subcategory_detail
+      url_path_name: subcategory_detail
+      template_name: categories/subcategory_detail
+
+  # ====== Cautare si rezultate ======
+  search:
+    - view_name: search
+      url_path_name: search
+      template_name: search/search
+
+    - view_name: advanced_search
+      url_path_name: advanced_search
+      template_name: search/advanced
+
+    - view_name: saved_searches
+      url_path_name: saved_searches
+      template_name: search/saved
+
+  # ====== Chat (mesaje intre utilizatori) ======
+  chat:
+    - view_name: inbox
+      url_path_name: inbox
+      template_name: chat/inbox
+
+    - view_name: thread
+      url_path_name: thread
+      template_name: chat/thread
+
+    - view_name: new_message
+      url_path_name: new_message
+      template_name: chat/new_message
+
+  # ====== Recenzii si rating ======
+  reviews:
+    - view_name: reviews_for_user
+      url_path_name: reviews_for_user
+      template_name: reviews/for_user
+
+    - view_name: create_review
+      url_path_name: create_review
+      template_name: reviews/create
+
+  # ====== Favorite / wishlist ======
+  favorites:
+    - view_name: favorites_list
+      url_path_name: favorites_list
+      template_name: favorites/list
+
+    - view_name: toggle_favorite
+      url_path_name: toggle_favorite
+      template_name: favorites/toggle
+
+  # ====== Notificari ======
+  notifications:
+    - view_name: notifications_list
+      url_path_name: notifications_list
+      template_name: notifications/list
+
+    - view_name: mark_read
+      url_path_name: mark_read
+      template_name: notifications/mark_read
+
+  # ====== Moderare / dashboard ======
+  dashboard:
+    - view_name: dashboard_home
+      url_path_name: dashboard_home
+      template_name: dashboard/home
+
+    - view_name: reports_list
+      url_path_name: reports_list
+      template_name: dashboard/reports
+
+    - view_name: verify_listings
+      url_path_name: verify_listings
+      template_name: dashboard/verify_listings
+
+  # ====== API (daca generatorul tau creeaza si endpoints simple) ======
+  api:
+    - view_name: api_listing_list
+      url_path_name: api_listing_list
+      template_name: api/listings_list  # placeholder
+
+    - view_name: api_listing_detail
+      url_path_name: api_listing_detail
+      template_name: api/listings_detail  # placeholder
+
+    - view_name: api_create_listing
+      url_path_name: api_create_listing
+      template_name: api/create_listing  # placeholder
+
+  # ====== WebSocket / Channels (placeholder pentru templates simple) ======
+  ws:
+    - view_name: chat_room
+      url_path_name: chat_room
+      template_name: ws/chat_room
+
+    - view_name: notifications_stream
+      url_path_name: notifications_stream
+      template_name: ws/notifications_stream
