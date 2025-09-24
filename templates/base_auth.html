@@ -17,7 +17,7 @@
     <script src="{% static 'js/password-toggle.js' %}"></script>
 </head>
 <body>
-    <!-- Simple Header for Auth Pages -->
+    <!-- header  -->
     <header class="auth-simple-header">
         <div class="container">
             <a href="{% url 'listings:home' %}">
@@ -27,7 +27,7 @@
     </header>
 
     <main>
-        <!-- Messages -->
+        <!-- messages -->
         {% if messages %}
             <div class="auth-messages">
                 {% for message in messages %}
@@ -41,7 +41,7 @@
         {% block content %}{% endblock %}
     </main>
     
-    <!-- Simple Footer -->
+    <!-- footer -->
     <footer class="auth-simple-footer">
         <p>&copy; 2025 Micu's Market. Toate drepturile rezervate.</p>
     </footer>
